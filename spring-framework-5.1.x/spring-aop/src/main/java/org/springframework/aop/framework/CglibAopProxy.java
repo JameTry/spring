@@ -76,7 +76,7 @@ import org.springframework.util.ObjectUtils;
  * @author Ramnivas Laddad
  * @author Chris Beams
  * @author Dave Syer
- * @see org.springframework.cglib.proxy.Enhancer
+ * @see Enhancer
  * @see AdvisedSupport#setProxyTargetClass
  * @see DefaultAopProxyFactory
  */

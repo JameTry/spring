@@ -76,8 +76,8 @@ import org.springframework.util.StringUtils;
  * <p>Any number of {@link TargetSourceCreator} implementations can be used to create
  * a custom target source: for example, to pool prototype objects. Auto-proxying will
  * occur even if there is no advice, as long as a TargetSourceCreator specifies a custom
- * {@link org.springframework.aop.TargetSource}. If there are no TargetSourceCreators set,
- * or if none matches, a {@link org.springframework.aop.target.SingletonTargetSource}
+ * {@link TargetSource}. If there are no TargetSourceCreators set,
+ * or if none matches, a {@link SingletonTargetSource}
  * will be used by default to wrap the target bean instance.
  *
  * @author Juergen Hoeller
@@ -159,7 +159,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	/**
 	 * Specify the {@link AdvisorAdapterRegistry} to use.
 	 * <p>Default is the global {@link AdvisorAdapterRegistry}.
-	 * @see org.springframework.aop.framework.adapter.GlobalAdvisorAdapterRegistry
+	 * @see GlobalAdvisorAdapterRegistry
 	 */
 	public void setAdvisorAdapterRegistry(AdvisorAdapterRegistry advisorAdapterRegistry) {
 		this.advisorAdapterRegistry = advisorAdapterRegistry;
@@ -364,9 +364,9 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * AopInfrastructureBeans as infrastructure classes.
 	 * @param beanClass the class of the bean
 	 * @return whether the bean represents an infrastructure class
-	 * @see org.aopalliance.aop.Advice
-	 * @see org.springframework.aop.Advisor
-	 * @see org.springframework.aop.framework.AopInfrastructureBean
+	 * @see Advice
+	 * @see Advisor
+	 * @see AopInfrastructureBean
 	 * @see #shouldSkip
 	 */
 	protected boolean isInfrastructureClass(Class<?> beanClass) {

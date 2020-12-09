@@ -82,7 +82,7 @@ public abstract class MethodMatchers {
 
 	/**
 	 * Apply the given MethodMatcher to the given Method, supporting an
-	 * {@link org.springframework.aop.IntroductionAwareMethodMatcher}
+	 * {@link IntroductionAwareMethodMatcher}
 	 * (if applicable).
 	 * @param mm the MethodMatcher to apply (may be an IntroductionAwareMethodMatcher)
 	 * @param method the candidate method

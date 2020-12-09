@@ -195,7 +195,7 @@ public class MethodInvocationProceedingJoinPointTests {
 			public void before(Method method, Object[] args, @Nullable Object target) throws Throwable {
 				// makeEncSJP, although meant for computing the enclosing join point,
 				// it serves our purpose here
-				JoinPoint.StaticPart aspectJVersionJp = Factory.makeEncSJP(method);
+				StaticPart aspectJVersionJp = Factory.makeEncSJP(method);
 				JoinPoint jp = AbstractAspectJAdvice.currentJoinPoint();
 
 				assertEquals(aspectJVersionJp.getSignature().toLongString(), jp.getSignature().toLongString());

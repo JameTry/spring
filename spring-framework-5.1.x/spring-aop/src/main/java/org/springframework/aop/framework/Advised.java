@@ -33,7 +33,7 @@ import org.springframework.aop.TargetSource;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @since 13.03.2003
- * @see org.springframework.aop.framework.AdvisedSupport
+ * @see AdvisedSupport
  */
 public interface Advised extends TargetClassAware {
 

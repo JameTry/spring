@@ -119,7 +119,7 @@ public class ProxyFactory extends ProxyCreatorSupport {
 	 * @param proxyInterface the interface that the proxy should implement
 	 * @param interceptor the interceptor that the proxy should invoke
 	 * @return the proxy object
-	 * @see #ProxyFactory(Class, org.aopalliance.intercept.Interceptor)
+	 * @see #ProxyFactory(Class, Interceptor)
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getProxy(Class<T> proxyInterface, Interceptor interceptor) {
@@ -132,7 +132,7 @@ public class ProxyFactory extends ProxyCreatorSupport {
 	 * @param proxyInterface the interface that the proxy should implement
 	 * @param targetSource the TargetSource that the proxy should invoke
 	 * @return the proxy object
-	 * @see #ProxyFactory(Class, org.springframework.aop.TargetSource)
+	 * @see #ProxyFactory(Class, TargetSource)
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getProxy(Class<T> proxyInterface, TargetSource targetSource) {

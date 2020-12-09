@@ -44,7 +44,7 @@ import org.springframework.util.Assert;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @since 2.0
- * @see org.springframework.aop.aspectj.annotation.AspectJAdvisorFactory
+ * @see AspectJAdvisorFactory
  */
 @SuppressWarnings("serial")
 public class AnnotationAwareAspectJAutoProxyCreator extends AspectJAwareAdvisorAutoProxyCreator {

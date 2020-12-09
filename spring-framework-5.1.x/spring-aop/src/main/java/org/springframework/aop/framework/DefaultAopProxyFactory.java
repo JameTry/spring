@@ -66,7 +66,7 @@ public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
 
 	/**
 	 * Determine whether the supplied {@link AdvisedSupport} has only the
-	 * {@link org.springframework.aop.SpringProxy} interface specified
+	 * {@link SpringProxy} interface specified
 	 * (or no proxy interfaces specified at all).
 	 */
 	private boolean hasNoUserSuppliedProxyInterfaces(AdvisedSupport config) {

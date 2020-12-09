@@ -32,9 +32,9 @@ import org.springframework.lang.Nullable;
 
 /**
  * Spring's implementation of the AOP Alliance
- * {@link org.aopalliance.intercept.MethodInvocation} interface,
+ * {@link MethodInvocation} interface,
  * implementing the extended
- * {@link org.springframework.aop.ProxyMethodInvocation} interface.
+ * {@link ProxyMethodInvocation} interface.
  *
  * <p>Invokes the target object using reflection. Subclasses can override the
  * {@link #invokeJoinpoint()} method to change this behavior, so this is also
@@ -205,7 +205,7 @@ public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Clonea
 	 * <p>We want a shallow copy in this case: We want to use the same interceptor
 	 * chain and other object references, but we want an independent value for the
 	 * current interceptor index.
-	 * @see java.lang.Object#clone()
+	 * @see Object#clone()
 	 */
 	@Override
 	public MethodInvocation invocableClone() {
@@ -224,7 +224,7 @@ public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Clonea
 	 * <p>We want a shallow copy in this case: We want to use the same interceptor
 	 * chain and other object references, but we want an independent value for the
 	 * current interceptor index.
-	 * @see java.lang.Object#clone()
+	 * @see Object#clone()
 	 */
 	@Override
 	public MethodInvocation invocableClone(Object... arguments) {

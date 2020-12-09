@@ -57,7 +57,7 @@ public class MethodCounter implements Serializable {
 	/**
 	 * A bit simplistic: just wants the same class.
 	 * Doesn't worry about counts.
-	 * @see java.lang.Object#equals(java.lang.Object)
+	 * @see Object#equals(Object)
 	 */
 	@Override
 	public boolean equals(Object other) {

@@ -160,7 +160,7 @@ public class ReflectiveAspectJAdvisorFactory extends AbstractAspectJAdvisorFacto
 	}
 
 	/**
-	 * Build a {@link org.springframework.aop.aspectj.DeclareParentsAdvisor}
+	 * Build a {@link DeclareParentsAdvisor}
 	 * for the given introduction field.
 	 * <p>Resulting Advisors will need to be evaluated for targets.
 	 * @param introductionField the field to introspect

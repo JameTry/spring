@@ -37,7 +37,7 @@ import org.springframework.util.ClassUtils;
 
 /**
  * JDK-based {@link AopProxy} implementation for the Spring AOP framework,
- * based on JDK {@link java.lang.reflect.Proxy dynamic proxies}.
+ * based on JDK {@link Proxy dynamic proxies}.
  *
  * <p>Creates a dynamic proxy, implementing the interfaces exposed by
  * the AopProxy. Dynamic proxies <i>cannot</i> be used to proxy methods
@@ -57,7 +57,7 @@ import org.springframework.util.ClassUtils;
  * @author Juergen Hoeller
  * @author Rob Harrop
  * @author Dave Syer
- * @see java.lang.reflect.Proxy
+ * @see Proxy
  * @see AdvisedSupport
  * @see ProxyFactory
  */

@@ -147,7 +147,7 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 	 * @return the sorted List of Advisors
 	 * @see org.springframework.core.Ordered
 	 * @see org.springframework.core.annotation.Order
-	 * @see org.springframework.core.annotation.AnnotationAwareOrderComparator
+	 * @see AnnotationAwareOrderComparator
 	 */
 	protected List<Advisor> sortAdvisors(List<Advisor> advisors) {
 		AnnotationAwareOrderComparator.sort(advisors);

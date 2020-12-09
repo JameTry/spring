@@ -41,7 +41,7 @@ import org.springframework.aop.support.ComposablePointcut;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @since 2.0
- * @see org.springframework.aop.aspectj.AspectJExpressionPointcut
+ * @see AspectJExpressionPointcut
  */
 @SuppressWarnings("serial")
 public class AspectMetadata implements Serializable {
