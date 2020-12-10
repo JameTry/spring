@@ -90,6 +90,7 @@ public abstract class BeanDefinitionReaderUtils {
 	}
 
 	/**
+	 * 为给定bean定义生成一个在给定bean工厂中唯一的bean名称。
 	 * Generate a bean name for the given bean definition, unique within the
 	 * given bean factory.
 	 * @param definition the bean definition to generate a bean name for
