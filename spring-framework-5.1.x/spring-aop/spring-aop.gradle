@@ -6,4 +6,5 @@ dependencies {
 	optional("org.aspectj:aspectjweaver:${aspectjVersion}")
 	optional("org.apache.commons:commons-pool2:2.6.2")
 	optional("com.jamonapi:jamon:2.81")
+	compile files('src/main/resources/lib/spring-aop-5.1.jar')
 }
