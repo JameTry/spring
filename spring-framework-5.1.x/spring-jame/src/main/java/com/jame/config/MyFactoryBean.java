@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class MyFactoryBean implements FactoryBean<A> {
 	@Override
 	public A getObject() throws Exception {
-		return new A(new B(new A(new B(new A(new B(new A(new B(new A(new B (new A()))))))))));
+		return new A(new B(new A()));
 	}
 
 	@Override

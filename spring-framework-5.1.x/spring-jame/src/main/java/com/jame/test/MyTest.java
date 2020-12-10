@@ -19,14 +19,11 @@ public class MyTest {
 	}
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		A a = (A) factory.getBean("a");
-		System.out.println(a);
+		A a = (A) factory.getBean("mf");
+		A a1 = (A) factory.getBean("mf");
+		System.out.println(a1);
 		
-		System.out.println("==========");
-		String[] strings = factory.getBeanDefinitionNames();
-		for (String s : strings) {
-			System.out.println(s);
-		}
+
 
 
 	}

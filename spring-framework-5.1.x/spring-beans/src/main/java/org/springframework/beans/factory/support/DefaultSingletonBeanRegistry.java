@@ -202,20 +202,31 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	@Nullable
 	protected Object getSingleton(String beanName, boolean allowEarlyReference) {
 		// Quick check for existing instance without full singleton lock
+		//首先尝试从单例缓存中获取bean
 		Object singletonObject = this.singletonObjects.get(beanName);
+		//如果从单例缓存中获取不到并且当前正在创建的beanName集合中没有当前要创建的beanName
 		if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
+			//尝试从早期对象三级缓存中获取bean
 			singletonObject = this.earlySingletonObjects.get(beanName);
+			// 未能获取到提前曝光的bean且当前的bean允许被创建早期依赖
 			if (singletonObject == null && allowEarlyReference) {
+				//将单例缓存map加锁
 				synchronized (this.singletonObjects) {
 					// Consistent creation of early reference within full singleton lock
+					//再次尝试从单例map缓存获取
 					singletonObject = this.singletonObjects.get(beanName);
 					if (singletonObject == null) {
+						//再次尝试从早期对象三级缓存中获取bean
 						singletonObject = this.earlySingletonObjects.get(beanName);
 						if (singletonObject == null) {
+							//尝试从单例工厂的缓存获取
 							ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
 							if (singletonFactory != null) {
+								//通过自定义factoryBean的getObject方法获取bean
 								singletonObject = singletonFactory.getObject();
+								//将读取到的bean添加到单例缓存
 								this.earlySingletonObjects.put(beanName, singletonObject);
+								// 从singletonFactories移除bean
 								this.singletonFactories.remove(beanName);
 							}
 						}
