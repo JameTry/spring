@@ -1272,6 +1272,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		if (mbd != null) {
 			return mbd;
 		}
+		//调用重载,参数beanName和beanDefinition
 		return getMergedBeanDefinition(beanName, getBeanDefinition(beanName));
 	}
 
@@ -1285,7 +1286,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 */
 	protected RootBeanDefinition getMergedBeanDefinition(String beanName, BeanDefinition bd)
 			throws BeanDefinitionStoreException {
-
+		//继续调用重载,beanName和beanDefinition,null
 		return getMergedBeanDefinition(beanName, bd, null);
 	}
 
@@ -1305,16 +1306,23 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			throws BeanDefinitionStoreException {
 
 		synchronized (this.mergedBeanDefinitions) {
+			// 准备一个RootBeanDefinition变量引用，用于记录要构建和最终要返回的BeanDefinition，
 			RootBeanDefinition mbd = null;
 
 			// Check with full lock now in order to enforce the same merged instance.
 			//立即检查完全锁定，以强制执行相同的合并实例。
 			if (containingBd == null) {
+				//尝试获取rootBeanDefinition
 				mbd = this.mergedBeanDefinitions.get(beanName);
 			}
-
+			//如果不存在rootBeanDefinition则进行创建
 			if (mbd == null) {
-				//判断当前beanDefinition是否有父bean
+				/*判断当前beanDefinition是否有父bean
+				 bd不是一个ChildBeanDefinition的情况,换句话讲，这 bd应该是 :
+				 1.一个独立的 GenericBeanDefinition 实例，parentName 属性为null
+				 2.或者是一个 RootBeanDefinition 实例，parentName 属性为null
+				 此时mbd直接使用一个bd的复制品
+				*/
 				if (bd.getParentName() == null) {
 					// Use copy of given root bean definition.
 					//如果是RootBeanDefinition直接强转克隆赋值给mbd
@@ -1327,6 +1335,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				}
 				else {
 					//子bean定义：需要与父bean合并。
+					//bd是一个ChildBeanDefinition的情况
+					//这种情况下需要将bd和parent beanDefinition合并到一起,形成最终的mbd
 					// Child bean definition: needs to be merged with parent.
 					BeanDefinition pbd;
 					try {
