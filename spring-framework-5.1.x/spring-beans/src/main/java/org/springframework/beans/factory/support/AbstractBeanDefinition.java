@@ -276,6 +276,8 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 
 	/**
+	 * 覆盖给定bean定义（可能是子对象）中此bean定义（可能是从父子继承关系中复制的父对象）中的设置。
+	 * 如果在给定的bean定义中指定，则将覆盖beanClass。
 	 * Override settings in this bean definition (presumably a copied parent
 	 * from a parent-child inheritance relationship) from the given bean
 	 * definition (presumably the child).
