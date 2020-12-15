@@ -323,6 +323,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			currentResources = new HashSet<>(4);
 			this.resourcesCurrentlyBeingLoaded.set(currentResources);
 		}
+		//add操作如果已经包含则返回false,那么这个判断就是用来判断是否重复加载同一个配置文件
 		if (!currentResources.add(encodedResource)) {
 			throw new BeanDefinitionStoreException(
 					"Detected cyclic loading of " + encodedResource + " - check your import definitions!");
@@ -338,7 +339,6 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 				}
 				//真正核心部分=======================----
 				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
-				//=========================================
 			}
 			finally {
 				inputStream.close();

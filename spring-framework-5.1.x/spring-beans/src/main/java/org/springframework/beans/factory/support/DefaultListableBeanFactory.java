@@ -178,7 +178,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	/** List of names of manually registered singletons, in registration order. */
 	private volatile Set<String> manualSingletonNames = new LinkedHashSet<>(16);
 
-	/** Cached array of bean definition names in case of frozen configuration. */
+	/** Cached array of bean definition names in case of frozen configuration.
+	 * 在冻结配置的情况下，bean定义名称的缓存数组
+	 * */
 	@Nullable
 	private volatile String[] frozenBeanDefinitionNames;
 
@@ -946,11 +948,12 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			this.beanDefinitionMap.put(beanName, beanDefinition);
 		}
 		else {
-			//判断是否注册过一次bean
+			//检查该工厂的Bean创建阶段是否已经开始，即在此期间是否有任何Bean被标记为已创建。
 			if (hasBeanCreationStarted()) {
 				// Cannot modify startup-time collection elements anymore (for stable iteration)
 				synchronized (this.beanDefinitionMap) {
 					//将beanName作为key,beanDefinition作为value放入map
+					//这个map用于存放Bean定义对象的映射，以Bean名称为键。
 					this.beanDefinitionMap.put(beanName, beanDefinition);
 					//创建一个用于存放所有BeanName的list
 					List<String> updatedDefinitions = new ArrayList<>(this.beanDefinitionNames.size() + 1);
@@ -967,7 +970,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 				this.beanDefinitionNames.add(beanName);
 				removeManualSingletonName(beanName);
 			}
-			//将bean的名称数组清空
+			//将 在冻结配置的情况下，bean定义名称的缓存数组清空
 			this.frozenBeanDefinitionNames = null;
 		}
 

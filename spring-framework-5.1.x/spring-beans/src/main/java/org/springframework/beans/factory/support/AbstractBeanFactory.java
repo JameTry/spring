@@ -270,7 +270,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					logger.trace("Returning cached instance of singleton bean '" + beanName + "'");
 				}
 			}
-			//该方法就是来判断获取的是一个普通的bean还是FactoryBean
+			//获取的bean可能是普通的bean对象,也可能是beanFactory,也可能是通过beanFactory的getObject()方法获取用户自定义的bean
 			//参数: 通过缓存获取的bean,传入的bean名称,加工后的beanName,null
 			bean = getObjectForBeanInstance(sharedInstance, name, beanName, null);
 		}
@@ -1702,6 +1702,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
+	 * 检查该工厂的Bean创建阶段是否已经开始，即在此期间是否有任何Bean被标记为已创建。
 	 * Check whether this factory's bean creation phase already started,
 	 * i.e. whether any bean has been marked as created in the meantime.
 	 * @since 4.2.2
