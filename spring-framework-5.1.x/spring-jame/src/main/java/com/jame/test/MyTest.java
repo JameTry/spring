@@ -1,5 +1,6 @@
 package com.jame.test;
 
+import com.jame.pojo.A;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
@@ -14,7 +15,7 @@ public class MyTest {
 	}
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		factory.getBean("a");
+		A a = (A) factory.getBean("a");
 		String[] beanDefinitionNames = factory.getBeanDefinitionNames();
 		for (String beanDefinitionName : beanDefinitionNames) {
 
