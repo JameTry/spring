@@ -1,7 +1,11 @@
 package com.jame.test;
 
+import com.jame.config.MyFactoryBean;
+import com.jame.config.Myconfig;
 import com.jame.pojo.A;
+import com.jame.pojo.B;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
 /**
@@ -15,20 +19,13 @@ public class MyTest {
 	}
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		A a = (A) factory.getBean("a1");
-		A a2 = (A) factory.getBean("a2");
-		A a3 = (A) factory.getBean("a3");
-		String[] beanDefinitionNames = factory.getBeanDefinitionNames();
-		for (String beanDefinitionName : beanDefinitionNames) {
+		A a = (A) factory.getBean("mf");
+		A a1 = (A) factory.getBean("mf");
+		System.out.println(a1);
+
 
 			System.out.println(beanDefinitionName);
 		}
-		System.out.println("====");
-		String[] as = factory.getAliases("a");
-		for (String s : as) {
-			System.out.println(s);
-		}
-
 
 
 	}
