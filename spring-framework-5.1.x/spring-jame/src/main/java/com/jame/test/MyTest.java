@@ -17,6 +17,7 @@ public class MyTest {
 	public static void main(String[] args) throws Exception {
 		test1();
 	}
+
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
 		A a = (A) factory.getBean("mf");
@@ -24,10 +25,9 @@ public class MyTest {
 		System.out.println(a1);
 
 
-			System.out.println(beanDefinitionName);
-		}
-
-
 	}
 
+
 }
+
+
