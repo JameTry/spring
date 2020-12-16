@@ -15,12 +15,20 @@ public class MyTest {
 	}
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		A a = (A) factory.getBean("a");
+		A a = (A) factory.getBean("a1");
+		A a2 = (A) factory.getBean("a2");
+		A a3 = (A) factory.getBean("a3");
 		String[] beanDefinitionNames = factory.getBeanDefinitionNames();
 		for (String beanDefinitionName : beanDefinitionNames) {
 
 			System.out.println(beanDefinitionName);
 		}
+		System.out.println("====");
+		String[] as = factory.getAliases("a");
+		for (String s : as) {
+			System.out.println(s);
+		}
+
 
 
 	}

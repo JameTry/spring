@@ -171,7 +171,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	private final Map<String, RootBeanDefinition> mergedBeanDefinitions = new ConcurrentHashMap<>(256);
 
 	/** Names of beans that have already been created at least once.
-	 *	至少已经创建过一次的bean的名称。
+	 *	至少已经创建过一次的beanDefinition的名称。
 	 * */
 	private final Set<String> alreadyCreated = Collections.newSetFromMap(new ConcurrentHashMap<>(256));
 
@@ -1763,12 +1763,14 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		Object object = null;
 		// 如果beanDefinition为null,则尝试从缓存中获取给定的FactoryBean公开的对象
 		if (mbd == null) {
+			//尝试从缓存中加载bean
 			object = getCachedObjectForFactoryBean(beanName);
 		}
 		// 未能从缓存中获得FactoryBean公开的对象,则说明该bean是一个新创建的bean
 		if (object == null) {
 			// Return bean instance from factory.
 			//从工厂返回bean实例。
+			//到这一步已经明确知道factoryInstance是FactoryBean类型,直接强转
 			FactoryBean<?> factory = (FactoryBean<?>) beanInstance;
 			// Caches object obtained from FactoryBean if it is a singleton.
 			//如果是单例对象，则缓存从FactoryBean获得的对象。判断是否存在这个beanDefinition
@@ -1850,6 +1852,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	//---------------------------------------------------------------------
 
 	/**
+	 * 检查此bean工厂是否包含具有给定名称的bean定义
 	 * Check if this bean factory contains a bean definition with the given name.
 	 * Does not consider any hierarchy this factory may participate in.
 	 * Invoked by {@code containsBean} when no cached singleton instance is found.

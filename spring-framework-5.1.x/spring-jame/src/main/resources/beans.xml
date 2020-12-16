@@ -7,7 +7,11 @@
 
 <!--	</bean>-->
 
-
+<bean id="a" class="com.jame.pojo.A"></bean>
+	<alias name="a" alias="a1"/>
+	<alias name="a" alias="a4"/>
+	<alias name="a" alias="a3"/>
+	<alias name="a" alias="a2"/>
 
 
 

@@ -142,20 +142,30 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	@Nullable
 	private String serializationId;
 
-	/** Whether to allow re-registration of a different definition with the same name. */
+	/** Whether to allow re-registration of a different definition with the same name.
+	 * 是否允许重新注册具有相同名称的不同定义。
+	 * */
 	private boolean allowBeanDefinitionOverriding = true;
 
-	/** Whether to allow eager class loading even for lazy-init beans. */
+	/** Whether to allow eager class loading even for lazy-init beans.
+	 * 是否允许甚至对于延迟初始化的bean都渴望加载类
+	 * */
 	private boolean allowEagerClassLoading = true;
 
-	/** Optional OrderComparator for dependency Lists and arrays. */
+	/** Optional OrderComparator for dependency Lists and arrays.
+	 * 依赖关系列表和数组的可选OrderComparator。
+	 * */
 	@Nullable
 	private Comparator<Object> dependencyComparator;
 
-	/** Resolver to use for checking if a bean definition is an autowire candidate. */
+	/** Resolver to use for checking if a bean definition is an autowire candidate.
+	 * 用于检查bean定义是否为自动装配候选的解析程序
+	 * */
 	private AutowireCandidateResolver autowireCandidateResolver = new SimpleAutowireCandidateResolver();
 
-	/** Map from dependency type to corresponding autowired value. */
+	/** Map from dependency type to corresponding autowired value.
+	 * 从依赖项类型映射到相应的自动装配值
+	 * */
 	private final Map<Class<?>, Object> resolvableDependencies = new ConcurrentHashMap<>(16);
 
 	/** Map of bean definition objects, keyed by bean name.
@@ -163,19 +173,29 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	 * */
 	private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
 
-	/** Map from bean name to merged BeanDefinitionHolder. */
+	/** Map from bean name to merged BeanDefinitionHolder.
+	 * 从bean名称映射到合并的BeanDefinitionHolder
+	 * */
 	private final Map<String, BeanDefinitionHolder> mergedBeanDefinitionHolders = new ConcurrentHashMap<>(256);
 
-	/** Map of singleton and non-singleton bean names, keyed by dependency type. */
+	/** Map of singleton and non-singleton bean names, keyed by dependency type.
+	 * 单例和非单例Bean名称的映射，按依赖项类型进行键控
+	 * */
 	private final Map<Class<?>, String[]> allBeanNamesByType = new ConcurrentHashMap<>(64);
 
-	/** Map of singleton-only bean names, keyed by dependency type. */
+	/** Map of singleton-only bean names, keyed by dependency type.
+	 * 仅依赖单例的bean名称的映射，由依赖项类型键控
+	 * */
 	private final Map<Class<?>, String[]> singletonBeanNamesByType = new ConcurrentHashMap<>(64);
 
-	/** List of bean definition names, in registration order. */
+	/** List of bean definition names, in registration order.
+	 * Bean定义名称列表，按注册顺序
+	 * */
 	private volatile List<String> beanDefinitionNames = new ArrayList<>(256);
 
-	/** List of names of manually registered singletons, in registration order. */
+	/** List of names of manually registered singletons, in registration order.
+	 * 手动注册单例的名称列表，按注册顺序
+	 * */
 	private volatile Set<String> manualSingletonNames = new LinkedHashSet<>(16);
 
 	/** Cached array of bean definition names in case of frozen configuration.
@@ -184,7 +204,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	@Nullable
 	private volatile String[] frozenBeanDefinitionNames;
 
-	/** Whether bean definition metadata may be cached for all beans. */
+	/** Whether bean definition metadata may be cached for all beans.
+	 * 是否可以为所有bean缓存bean定义元数据。
+	 * */
 	private volatile boolean configurationFrozen;
 
 
@@ -916,7 +938,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		}
 		//尝试获取bean定义
 		BeanDefinition existingDefinition = this.beanDefinitionMap.get(beanName);
-		//处理已经注册beanName情况
+		//处理已经注册beanDefinition情况
 		if (existingDefinition != null) {
 			//如果设置了不允许覆盖直接抛出异常
 			if (!isAllowBeanDefinitionOverriding()) {
@@ -944,9 +966,10 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 							"] with [" + beanDefinition + "]");
 				}
 			}
-			//覆盖原来的beanName
+			//覆盖原来的beanDefinition
 			this.beanDefinitionMap.put(beanName, beanDefinition);
 		}
+		//说明这个BeanDefinition没有注册过
 		else {
 			//检查该工厂的Bean创建阶段是否已经开始，即在此期间是否有任何Bean被标记为已创建。
 			if (hasBeanCreationStarted()) {
