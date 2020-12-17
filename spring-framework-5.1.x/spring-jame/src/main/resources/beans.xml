@@ -3,16 +3,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd">
-<!--	<bean id="mf" class="com.jame.config.MyFactoryBean">-->
+	<!--	<bean id="mf" class="com.jame.config.MyFactoryBean">-->
 
-<!--	</bean>-->
+	<!--	</bean>-->
 
-<bean id="a" class="com.jame.pojo.A"></bean>
-	<alias name="a" alias="a1"/>
-	<alias name="a" alias="a4"/>
-	<alias name="a" alias="a3"/>
-	<alias name="a" alias="a2"/>
+	<bean id="a" class="com.jame.pojo.A">
+		<property name="b" ref="b"/>
+	</bean>
+	<bean id="b" class="com.jame.pojo.B">
+		<property name="a" ref="a"/>
+	</bean>
 
-
+	<bean id="c" class="com.jame.pojo.C">
+		<constructor-arg index="0" ref="c"/>
+	</bean>
 
 </beans>
