@@ -9,15 +9,13 @@ import org.springframework.stereotype.Component;
  * @description:
  */
 public class B {
-	@Autowired
+
 	private A a;
 
 	public B() {
 	}
 
-	public B(A a) {
-		this.a = a;
-	}
+
 
 	public A getA() {
 		return a;
@@ -27,10 +25,5 @@ public class B {
 		this.a = a;
 	}
 
-	@Override
-	public String toString() {
-		return "B{" +
-				"a=" + a +
-				'}';
-	}
+
 }

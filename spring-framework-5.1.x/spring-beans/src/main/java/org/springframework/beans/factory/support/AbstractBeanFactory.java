@@ -286,6 +286,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			// Check if bean definition exists in this factory.
 			//如果beanDefinitionMap中不包括beanName,则尝试从parentBeanFactory中寻找
 			BeanFactory parentBeanFactory = getParentBeanFactory();
+			//如果父工厂不为空,并且当前beanDefinitionMap中包含对应的BeanDefinition
 			if (parentBeanFactory != null && !containsBeanDefinition(beanName)) {
 				// Not found -> check parent.
 				// 将name转换为原始beanName
@@ -362,7 +363,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 							// Explicitly remove instance from singleton cache: It might have been put there
 							// eagerly by the creation process, to allow for circular reference resolution.
 							// Also remove any beans that received a temporary reference to the bean.
-							//如果出现异常,删除在单例缓存中的实例,因为它可能是因为为了解决依赖而放入缓存,也删除接收到该bean的临时引用的所以bean
+							//如果出现异常,删除在单例缓存中的实例,因为它可能是为了解决依赖而放入缓存,也删除接收到该bean的临时引用的所以bean
 							destroySingleton(beanName);
 							throw ex;
 						}

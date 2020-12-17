@@ -10,27 +10,17 @@ import org.springframework.stereotype.Component;
 
 public class C {
 
-	private A a;
+	private C c;
 
-	public C() {
+	public C(C c) {
+		this.c = c;
 	}
 
-	public C(A a) {
-		this.a = a;
+	public C getC() {
+		return c;
 	}
 
-	public A getA() {
-		return a;
-	}
-
-	public void setA(A a) {
-		this.a = a;
-	}
-
-	@Override
-	public String toString() {
-		return "C{" +
-				"a=" + a +
-				'}';
+	public void setC(C c) {
+		this.c = c;
 	}
 }
