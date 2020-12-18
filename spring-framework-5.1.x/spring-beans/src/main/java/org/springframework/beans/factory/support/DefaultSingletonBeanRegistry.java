@@ -92,6 +92,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 * 早期的单例对象【未进行初始化的对象】缓存，三级缓存
 	 * 也是保存beanName和bean实例之间的关系,与singletObjects不同之处在于,当一个单例bean被放到这里后
 	 * 当bean还在创建过程中就可以通过getBean方法来获取,目的是用来检测循环依赖
+	 * ??????通过单例缓存工厂就可以获取半成品bean,为什么还要创建这个map
 	 * */
 	private final Map<String, Object> earlySingletonObjects = new ConcurrentHashMap<>(16);
 
@@ -183,8 +184,11 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	protected void addSingletonFactory(String beanName, ObjectFactory<?> singletonFactory) {
 		Assert.notNull(singletonFactory, "Singleton factory must not be null");
 		synchronized (this.singletonObjects) {
+			//当单例缓存中不包含当前要创建的bean才会添加singletonFactory对象
 			if (!this.singletonObjects.containsKey(beanName)) {
+				//将对象添加到单例工厂的缓存,也就是二级缓存
 				this.singletonFactories.put(beanName, singletonFactory);
+				//将3级缓存中移除,3个缓存中存的都是同一个bean,所以不可能同时存在
 				this.earlySingletonObjects.remove(beanName);
 				this.registeredSingletons.add(beanName);
 			}
@@ -228,7 +232,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 							//尝试从单例工厂的缓存获取
 							ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
 							if (singletonFactory != null) {
-								//通过自定义factoryBean的getObject方法获取bean
+								//通过factoryBean的getObject方法获取半成品bean
 								singletonObject = singletonFactory.getObject();
 								//将读取到的bean添加到单例缓存
 								this.earlySingletonObjects.put(beanName, singletonObject);
@@ -268,7 +272,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 				if (logger.isDebugEnabled()) {
 					logger.debug("Creating shared instance of singleton bean '" + beanName + "'");
 				}
-				//创建单利模式前的回调方法
+				//创建单例模式前的回调方法
 				beforeSingletonCreation(beanName);
 				//将新创建的bean单例设置为false
 				boolean newSingleton = false;
