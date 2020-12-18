@@ -14,13 +14,18 @@ import org.springframework.core.io.ClassPathResource;
  * @date: 2020/12/3 10:27
  * @description:
  */
+
 public class MyTest {
+
+
 	public static void main(String[] args) throws Exception {
 		test1();
 	}
 
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.getBean(A.class);
 		A a = (A) factory.getBean("a");
 		B b = (B) factory.getBean("b");
 		System.out.println("a     "+a);
@@ -32,7 +37,6 @@ public class MyTest {
 		System.out.println("b-a-b "+b.getA().getB());
 
 		System.out.println((C)factory.getBean("c"));
-
 
 	}
 
