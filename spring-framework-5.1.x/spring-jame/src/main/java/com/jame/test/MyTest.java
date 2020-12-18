@@ -32,7 +32,7 @@ public class MyTest {
 		System.out.println("b-a-b "+b.getA().getB());
 
 		System.out.println((C)factory.getBean("c"));
-
+		//master
 
 	}
 
