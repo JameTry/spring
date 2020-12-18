@@ -24,8 +24,6 @@ public class MyTest {
 
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.getBean(A.class);
 		A a = (A) factory.getBean("a");
 		B b = (B) factory.getBean("b");
 		System.out.println("a     "+a);
