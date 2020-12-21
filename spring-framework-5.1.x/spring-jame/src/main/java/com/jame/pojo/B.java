@@ -10,20 +10,28 @@ import org.springframework.stereotype.Component;
  */
 public class B {
 
-	private A a;
+
+	String name;
 
 	public B() {
 	}
 
-
-
-	public A getA() {
-		return a;
+	public B(String name) {
+		this.name = name;
 	}
 
-	public void setA(A a) {
-		this.a = a;
+	public String getName() {
+		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	@Override
+	public String toString() {
+		return "B{" +
+				"name='" + name + '\'' +
+				'}';
+	}
 }

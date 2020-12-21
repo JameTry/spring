@@ -573,6 +573,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 			// Work out whether to apply setter autowiring or constructor autowiring.
 			// If it has a no-arg constructor it's deemed to be setter autowiring,
 			// otherwise we'll try constructor autowiring.
+			//确定是应用setter自动装配还是构造函数自动装配。
+			// 如果它具有no-arg构造函数，则将其视为setter自动装配
+			// 否则，我们将尝试构造函数自动装配
 			Constructor<?>[] constructors = getBeanClass().getConstructors();
 			for (Constructor<?> constructor : constructors) {
 				if (constructor.getParameterCount() == 0) {
