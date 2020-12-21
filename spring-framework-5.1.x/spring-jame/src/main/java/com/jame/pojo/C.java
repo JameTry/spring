@@ -12,9 +12,7 @@ public class C {
 
 	private C c;
 
-	public C(C c) {
-		this.c = c;
-	}
+
 
 	public C getC() {
 		return c;

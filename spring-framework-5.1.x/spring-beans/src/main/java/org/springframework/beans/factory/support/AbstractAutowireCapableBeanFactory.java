@@ -155,7 +155,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 */
 	private final NamedThreadLocal<String> currentlyCreatedBean = new NamedThreadLocal<>("Currently created bean");
 
-	/** Cache of unfinished FactoryBean instances: FactoryBean name to BeanWrapper. */
+	/**未完成的FactoryBean实例的高速缓存：BeanWrapper的FactoryBean名称
+	 *  Cache of unfinished FactoryBean instances: FactoryBean name to BeanWrapper. */
 	private final ConcurrentMap<String, BeanWrapper> factoryBeanInstanceCache = new ConcurrentHashMap<>();
 
 	/** Cache of candidate factory methods per factory class. */
@@ -500,10 +501,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// clone the bean definition in case of a dynamically resolved Class
 		// which cannot be stored in the shared merged bean definition.
 		//确保此时实际解析了bean类，如果动态解析的类不能存储在共享合并的bean定义中，则克隆bean定义。
-
 		Class<?> resolvedClass = resolveBeanClass(mbd, beanName);
-		//判断获得的被包装的bean不为空并且是一个Class对象,并且ClassName不为空
-		if (resolvedClass != null && !mbd.hasBeanClass() && mbd.getBeanClassName() != null) {
+		//判断获得的被包装的bean不为空并且不是一个Class对象,并且ClassName不为空
+		if (resolvedClass != null
+				&& !mbd.hasBeanClass()
+				&& mbd.getBeanClassName() != null) {
 			//?????为什么不直接set,而是创建了一个新的RootBeanDefinition对象
 			mbdToUse = new RootBeanDefinition(mbd);
 			//将包装的bean对象传入

@@ -6,6 +6,9 @@ import com.jame.pojo.A;
 import com.jame.pojo.B;
 import com.jame.pojo.C;
 import com.jame.pojo.SonB;
+import org.springframework.beans.factory.support.ChildBeanDefinition;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.ClassPathResource;
@@ -25,8 +28,25 @@ public class MyTest {
 
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		SonB sonB= (SonB) factory.getBean("sonB");
-		System.out.println(sonB);
+		C c = (C) factory.getBean("c");
+		System.out.println(c.getC().getC().getC());
+//		RootBeanDefinition rootBeanDefinition=new RootBeanDefinition();
+//		rootBeanDefinition.setBeanClass(B.class);
+//		rootBeanDefinition.getPropertyValues()
+//				.add("name","小明")
+//				.add("age",20);
+//		factory.registerBeanDefinition("b",rootBeanDefinition);
+//
+//		GenericBeanDefinition genericBeanDefinition=new GenericBeanDefinition();
+//		genericBeanDefinition.setBeanClass(SonB.class);
+//		genericBeanDefinition.setParentName("b");
+//		genericBeanDefinition.getPropertyValues()
+//				.addPropertyValue("name","looo");
+//		factory.registerBeanDefinition("sonB",genericBeanDefinition);
+//
+//
+//		SonB sonB= (SonB) factory.getBean("sonB");
+//		System.out.println(sonB);
 
 
 		//up

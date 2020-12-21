@@ -1036,6 +1036,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
+	 * 返回给定bean名称的“合并的” BeanDefinition，如有必要，将子bean定义与其父对象合并。
 	 * Return a 'merged' BeanDefinition for the given bean name,
 	 * merging a child bean definition with its parent if necessary.
 	 * <p>This {@code getMergedBeanDefinition} considers bean definition
@@ -1050,6 +1051,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	public BeanDefinition getMergedBeanDefinition(String name) throws BeansException {
 		String beanName = transformedBeanName(name);
 		// Efficiently check whether bean definition exists in this factory.
+		//如果不包含bean定义并且当前类的父工厂类型是ConfigurableBeanFactory
 		if (!containsBeanDefinition(beanName) && getParentBeanFactory() instanceof ConfigurableBeanFactory) {
 			return ((ConfigurableBeanFactory) getParentBeanFactory()).getMergedBeanDefinition(beanName);
 		}
@@ -1321,12 +1323,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			}
 			//如果不存在rootBeanDefinition则进行创建
 			if (mbd == null) {
-				/*判断当前beanDefinition是否有父bean
-				 bd不是一个ChildBeanDefinition的情况,换句话讲，这 bd应该是 :
-				 1.一个独立的 GenericBeanDefinition 实例，parentName 属性为null
-				 2.或者是一个 RootBeanDefinition 实例，parentName 属性为null
-				 此时mbd直接使用一个bd的复制品
-				*/
+
+				//判断当前beanDefinition是否有父bean
 				if (bd.getParentName() == null) {
 					// Use copy of given root bean definition.
 					//如果是RootBeanDefinition直接强转克隆赋值给mbd
@@ -1348,7 +1346,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 						String parentBeanName = transformedBeanName(bd.getParentName());
 						//如果当前beanName不等于父beanName
 						if (!beanName.equals(parentBeanName)) {
-							//再调用一次方法
+							//调用合并方法
 							pbd = getMergedBeanDefinition(parentBeanName);
 						}
 						else {
@@ -1369,6 +1367,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					}
 					// Deep copy with overridden values.
 					mbd = new RootBeanDefinition(pbd);
+					//覆盖子类
 					mbd.overrideFrom(bd);
 				}
 
@@ -1650,6 +1649,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
+	 * 将指定的bean标记为已创建（或将要创建）。 <p>这允许bean工厂优化其缓存以重复创建指定的bean
 	 * Mark the specified bean as already created (or about to be created).
 	 * <p>This allows the bean factory to optimize its caching for repeated
 	 * creation of the specified bean.
@@ -1856,7 +1856,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	//---------------------------------------------------------------------
 
 	/**
-	 * 检查此bean工厂是否包含具有给定名称的bean定义
+	 * 检查此beanDefinition工厂是否包含具有给定名称的bean定义
 	 * Check if this bean factory contains a bean definition with the given name.
 	 * Does not consider any hierarchy this factory may participate in.
 	 * Invoked by {@code containsBean} when no cached singleton instance is found.
