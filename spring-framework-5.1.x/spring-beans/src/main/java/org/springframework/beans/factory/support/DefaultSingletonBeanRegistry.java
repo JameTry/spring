@@ -92,7 +92,6 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 * 早期的单例对象【未进行初始化的对象】缓存，三级缓存
 	 * 也是保存beanName和bean实例之间的关系,与singletObjects不同之处在于,当一个单例bean被放到这里后
 	 * 当bean还在创建过程中就可以通过getBean方法来获取,目的是用来检测循环依赖
-	 * ??????通过单例缓存工厂就可以获取半成品bean,为什么还要创建这个map
 	 * */
 	private final Map<String, Object> earlySingletonObjects = new ConcurrentHashMap<>(16);
 
@@ -469,6 +468,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	}
 
 	/**
+	 * 为给定的bean注册一个从属bean，要在给定的bean被销毁之前将其销毁。
 	 * Register a dependent bean for the given bean,
 	 * to be destroyed before the given bean is destroyed.
 	 * @param beanName the name of the bean

@@ -280,7 +280,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			// Fail if we're already creating this bean instance:
 			// We're assumably within a circular reference.
 			//如果返回true说明这个原型bean已经被准备创建一次了,出现了循环依赖,直接抛出异常↓
-			//spring是不解决原型bean的循环依赖
+			//spring不解决原型bean的循环依赖
 			if (isPrototypeCurrentlyInCreation(beanName)) {
 				throw new BeanCurrentlyInCreationException(beanName);
 			}
@@ -329,7 +329,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				checkMergedBeanDefinition(mbd, beanName, args);
 
 				// Guarantee initialization of beans that the current bean depends on.
-				//getDependsOn()这个方法返回当前bean依赖的所以bean名称
+				//getDependsOn()这个方法返回当前bean依赖的所有bean名称
 				String[] dependsOn = mbd.getDependsOn();
 				//如果存在依赖,则递归实例化依赖的bean
 				if (dependsOn != null) {
@@ -934,6 +934,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
+	 * 返回此工厂是否拥有InstantiationAwareBeanPostProcessor，它将在创建时应用于单例bean
 	 * Return whether this factory holds a InstantiationAwareBeanPostProcessor
 	 * that will get applied to singleton beans on creation.
 	 * @see #addBeanPostProcessor
