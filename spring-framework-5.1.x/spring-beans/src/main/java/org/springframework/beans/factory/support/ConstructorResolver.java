@@ -122,8 +122,9 @@ class ConstructorResolver {
 
 		BeanWrapperImpl bw = new BeanWrapperImpl();
 		this.beanFactory.initBeanWrapper(bw);
-
+		//此处为用来实例化的类的构造函数
 		Constructor<?> constructorToUse = null;
+		//此为构造函数参数配置(包含xml中配置的构造函数参数值)
 		ArgumentsHolder argsHolderToUse = null;
 		Object[] argsToUse = null;
 
@@ -645,6 +646,8 @@ class ConstructorResolver {
 	}
 
 	/**
+	 * 将此bean的构造函数参数解析为resolveValues对象。这可能涉及查找其他bean
+	 * 此方法还用于处理静态工厂方法的调用
 	 * Resolve the constructor arguments for this bean into the resolvedValues object.
 	 * This may involve looking up other beans.
 	 * <p>This method is also used for handling invocations of static factory methods.

@@ -28,12 +28,8 @@ public class MyTest {
 
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		C c = (C) factory.getBean("c",2);
-		System.out.println(c);
-		String[] strings = factory.getBeanDefinitionNames();
-		for (String string : strings) {
-			System.out.println(string);
-		}
+		Object b = factory.getBean("gb");
+		System.out.println(b);
 
 	}
 
