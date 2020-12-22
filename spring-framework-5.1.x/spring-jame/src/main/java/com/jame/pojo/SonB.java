@@ -7,12 +7,14 @@ package com.jame.pojo;
  */
 public class SonB {
 	int age;
+	String name;
 
-	public SonB(int age) {
-		this.age = age;
+	public String getName() {
+		return name;
 	}
 
-	public SonB() {
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getAge() {
@@ -27,6 +29,7 @@ public class SonB {
 	public String toString() {
 		return "SonB{" +
 				"age=" + age +
+				", name='" + name + '\'' +
 				'}';
 	}
 }

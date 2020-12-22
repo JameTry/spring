@@ -726,6 +726,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	}
 
 	/**
+	 * 返回用于创建bean实例的回调（如果有）。
 	 * Return a callback for creating an instance of the bean, if any.
 	 * @since 5.0
 	 */
@@ -750,6 +751,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	}
 
 	/**
+	 * 返回是否允许访问非公共构造函数和方法
 	 * Return whether to allow access to non-public constructors and methods.
 	 */
 	public boolean isNonPublicAccessAllowed() {

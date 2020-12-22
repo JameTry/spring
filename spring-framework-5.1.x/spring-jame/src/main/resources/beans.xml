@@ -4,8 +4,11 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-		<bean class="com.jame.pojo.A" id="a"/>
-		<bean id="b" class="com.jame.pojo.B"/>
+	<!--		<bean class="com.jame.pojo.A" id="a"/>-->
+	<!--		<bean id="b" class="com.jame.pojo.B"/>-->
 
-		<bean  id="sonB" class="com.jame.pojo.SonB" parent="b"/>
+	<!--		<bean  id="sonB" class="com.jame.pojo.SonB" parent="b"/>-->
+	<!--	<bean class="com.jame.pojo.Baware" id="ba"/>-->
+	<bean id="c" class="com.jame.pojo.C"/>
+
 </beans>

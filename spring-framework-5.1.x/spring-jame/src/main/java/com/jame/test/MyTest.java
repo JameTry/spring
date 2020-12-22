@@ -6,6 +6,9 @@ import com.jame.pojo.A;
 import com.jame.pojo.B;
 import com.jame.pojo.C;
 import com.jame.pojo.SonB;
+import org.springframework.beans.factory.support.ChildBeanDefinition;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.ClassPathResource;
@@ -25,11 +28,12 @@ public class MyTest {
 
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		SonB sonB= (SonB) factory.getBean("sonB");
-		System.out.println(sonB);
-
-
-		//up
+		C c = (C) factory.getBean("c",2);
+		System.out.println(c);
+		String[] strings = factory.getBeanDefinitionNames();
+		for (String string : strings) {
+			System.out.println(string);
+		}
 
 	}
 
