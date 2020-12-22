@@ -9,16 +9,24 @@ import org.springframework.stereotype.Component;
  */
 
 public class C {
-
-	private C c;
-
+	int id;
 
 
-	public C getC() {
-		return c;
+	public C() {
 	}
 
-	public void setC(C c) {
-		this.c = c;
+
+
+	public C(int id) {
+		this.id = id;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "C{" +
+				"id=" + id +
+				'}';
 	}
 }

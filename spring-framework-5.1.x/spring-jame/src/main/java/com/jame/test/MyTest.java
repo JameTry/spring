@@ -28,28 +28,12 @@ public class MyTest {
 
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		C c = (C) factory.getBean("c");
-		System.out.println(c.getC().getC().getC());
-//		RootBeanDefinition rootBeanDefinition=new RootBeanDefinition();
-//		rootBeanDefinition.setBeanClass(B.class);
-//		rootBeanDefinition.getPropertyValues()
-//				.add("name","小明")
-//				.add("age",20);
-//		factory.registerBeanDefinition("b",rootBeanDefinition);
-//
-//		GenericBeanDefinition genericBeanDefinition=new GenericBeanDefinition();
-//		genericBeanDefinition.setBeanClass(SonB.class);
-//		genericBeanDefinition.setParentName("b");
-//		genericBeanDefinition.getPropertyValues()
-//				.addPropertyValue("name","looo");
-//		factory.registerBeanDefinition("sonB",genericBeanDefinition);
-//
-//
-//		SonB sonB= (SonB) factory.getBean("sonB");
-//		System.out.println(sonB);
-
-
-		//up
+		C c = (C) factory.getBean("c",2);
+		System.out.println(c);
+		String[] strings = factory.getBeanDefinitionNames();
+		for (String string : strings) {
+			System.out.println(string);
+		}
 
 	}
 
