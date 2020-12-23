@@ -155,7 +155,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 */
 	private final NamedThreadLocal<String> currentlyCreatedBean = new NamedThreadLocal<>("Currently created bean");
 
-	/** Cache of unfinished FactoryBean instances: FactoryBean name to BeanWrapper. */
+	/**未完成的FactoryBean实例的高速缓存：BeanWrapper的FactoryBean名称
+	 *  Cache of unfinished FactoryBean instances: FactoryBean name to BeanWrapper. */
 	private final ConcurrentMap<String, BeanWrapper> factoryBeanInstanceCache = new ConcurrentHashMap<>();
 
 	/** Cache of candidate factory methods per factory class. */
@@ -174,7 +175,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		super();
 		//忽略给定接口的自动装配功能
 		//默认情况下获取A,而A的Bean属性还有B,而B还没有初始化,那么Spring会将B初始化,
-		//但是某些情况下不会初始化B,例如B继承了BeanFactoryAware接口
+		//但是某些情况下不会初始化B,例如B实现了BeanFactoryAware接口
 		ignoreDependencyInterface(BeanNameAware.class);
 		ignoreDependencyInterface(BeanFactoryAware.class);
 		ignoreDependencyInterface(BeanClassLoaderAware.class);
@@ -500,10 +501,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// clone the bean definition in case of a dynamically resolved Class
 		// which cannot be stored in the shared merged bean definition.
 		//确保此时实际解析了bean类，如果动态解析的类不能存储在共享合并的bean定义中，则克隆bean定义。
-
 		Class<?> resolvedClass = resolveBeanClass(mbd, beanName);
-		//判断获得的被包装的bean不为空并且是一个Class对象,并且ClassName不为空
-		if (resolvedClass != null && !mbd.hasBeanClass() && mbd.getBeanClassName() != null) {
+		//判断获得的被包装的bean不为空并且不是一个Class对象,并且ClassName不为空
+		if (resolvedClass != null
+				&& !mbd.hasBeanClass()
+				&& mbd.getBeanClassName() != null) {
 			//?????为什么不直接set,而是创建了一个新的RootBeanDefinition对象
 			mbdToUse = new RootBeanDefinition(mbd);
 			//将包装的bean对象传入
@@ -513,6 +515,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Prepare method overrides.
 		try {
 			//验证和准备覆盖方法
+			//lookup-method和replace-method替换都会在这个方法中标记
 			mbdToUse.prepareMethodOverrides();
 		}
 		catch (BeanDefinitionValidationException ex) {
@@ -1131,11 +1134,19 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		//如果尚未被解析
 		if (!Boolean.FALSE.equals(mbd.beforeInstantiationResolved)) {
 			// Make sure bean class is actually resolved at this point.
+			//确保此时确实解决了bean类。
 			if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
 				Class<?> targetType = determineTargetType(beanName, mbd);
 				if (targetType != null) {
+					//调用前置处理
 					bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName);
 					if (bean != null) {
+						/*调用后置处理1
+						  Spring的规则就是在bean的初始化结束后
+						  尽可能保证将注册的后置处理器postProcessAfterInitialization方法应用在该bean中
+						  因为如果返回的bean不为空,那么就不会再经历普通的bean创建过程
+						  所以只能在这里应用后置处理器的方法
+						 */
 						bean = applyBeanPostProcessorsAfterInitialization(bean, beanName);
 					}
 				}
@@ -1175,6 +1186,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	/**
+	 * 使用适当的实例化策略为指定的bean创建一个新实例：工厂方法，构造函数自动装配或简单实例化
 	 * Create a new instance for the specified bean, using an appropriate instantiation strategy:
 	 * factory method, constructor autowiring, or simple instantiation.
 	 * @param beanName the name of the bean
@@ -1209,8 +1221,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Shortcut when re-creating the same bean...
 		boolean resolved = false;
 		boolean autowireNecessary = false;
+		//没有传入参数的情况
 		if (args == null) {
 			synchronized (mbd.constructorArgumentLock) {
+				//一个类有多个构造函数,每个构造函数方法又有不同参数,所以调用前先根据参数锁定构造函数或者对应的工厂方法
 				if (mbd.resolvedConstructorOrFactoryMethod != null) {
 					resolved = true;
 					autowireNecessary = mbd.constructorArgumentsResolved;
@@ -1410,6 +1424,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			}
 			else {
 				// Skip property population phase for null instance.
+				//跳过属性填充阶段以获取空实例
 				return;
 			}
 		}
@@ -1417,6 +1432,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Give any InstantiationAwareBeanPostProcessors the opportunity to modify the
 		// state of the bean before properties are set. This can be used, for example,
 		// to support styles of field injection.
+		//在设置属性之前，让任何InstantiationAwareBeanPostProcessors都有机会修改Bean的状态。例如，可以用来支持属性注入的类型
 		if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
 			for (BeanPostProcessor bp : getBeanPostProcessors()) {
 				if (bp instanceof InstantiationAwareBeanPostProcessor) {

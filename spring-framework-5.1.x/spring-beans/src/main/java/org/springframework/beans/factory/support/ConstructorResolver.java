@@ -122,8 +122,9 @@ class ConstructorResolver {
 
 		BeanWrapperImpl bw = new BeanWrapperImpl();
 		this.beanFactory.initBeanWrapper(bw);
-
+		//此处为用来实例化的类的构造函数
 		Constructor<?> constructorToUse = null;
+		//此为构造函数参数配置(包含xml中配置的构造函数参数值)
 		ArgumentsHolder argsHolderToUse = null;
 		Object[] argsToUse = null;
 
@@ -132,6 +133,7 @@ class ConstructorResolver {
 			argsToUse = explicitArgs;
 		}
 		else {
+			//在getBean方法时没有指定则尝试从配置文件中解析
 			Object[] argsToResolve = null;
 			//尝试从缓存中获取
 			synchronized (mbd.constructorArgumentLock) {
@@ -148,11 +150,12 @@ class ConstructorResolver {
 			}
 			//如果缓存中存在
 			if (argsToResolve != null) {
-				//解析参数类型
+				//解析参数类型,如果给定方法的1构造函数A(int,int)则通过此方法("1","1")会转换成(1,1)
+				//缓存中的值可能是最终值也肯是原始值
 				argsToUse = resolvePreparedArguments(beanName, mbd, bw, constructorToUse, argsToResolve, true);
 			}
 		}
-
+		//如果没有被缓存
 		if (constructorToUse == null || argsToUse == null) {
 			// Take specified constructors, if any.
 			Constructor<?>[] candidates = chosenCtors;
@@ -192,11 +195,14 @@ class ConstructorResolver {
 				minNrOfArgs = explicitArgs.length;
 			}
 			else {
+				//提取配置文件中的构造函数参数
 				ConstructorArgumentValues cargs = mbd.getConstructorArgumentValues();
+				//用于承载解析后构造函数参数值
 				resolvedValues = new ConstructorArgumentValues();
+				//能解析到参数的个数
 				minNrOfArgs = resolveConstructorArguments(beanName, mbd, bw, cargs, resolvedValues);
 			}
-
+			//排序给定的构造函数,public构造函数优先参数降序,private构造函数参数降序
 			AutowireUtils.sortConstructors(candidates);
 			int minTypeDiffWeight = Integer.MAX_VALUE;
 			Set<Constructor<?>> ambiguousConstructors = null;
@@ -204,7 +210,7 @@ class ConstructorResolver {
 
 			for (Constructor<?> candidate : candidates) {
 				Class<?>[] paramTypes = candidate.getParameterTypes();
-
+				//如果已经找到选用的构造函数或者构造函数需要参数个数小于当前构造函数参数个数则终止,因为已经按照参数个数降序
 				if (constructorToUse != null && argsToUse != null && argsToUse.length > paramTypes.length) {
 					// Already found greedy constructor that can be satisfied ->
 					// do not look any further, there are only less greedy constructors left.
@@ -216,6 +222,7 @@ class ConstructorResolver {
 
 				ArgumentsHolder argsHolder;
 				if (resolvedValues != null) {
+					//有参数则根据值构造对应的参数类型的参数
 					try {
 						String[] paramNames = ConstructorPropertiesChecker.evaluate(candidate, paramTypes.length);
 						if (paramNames == null) {
@@ -241,7 +248,7 @@ class ConstructorResolver {
 				}
 				else {
 					// Explicit arguments given -> arguments length must match exactly.
-					if (paramTypes.length != explicitArgs.length) {
+ 					if (paramTypes.length != explicitArgs.length) {
 						continue;
 					}
 					argsHolder = new ArgumentsHolder(explicitArgs);
@@ -639,6 +646,8 @@ class ConstructorResolver {
 	}
 
 	/**
+	 * 将此bean的构造函数参数解析为resolveValues对象。这可能涉及查找其他bean
+	 * 此方法还用于处理静态工厂方法的调用
 	 * Resolve the constructor arguments for this bean into the resolvedValues object.
 	 * This may involve looking up other beans.
 	 * <p>This method is also used for handling invocations of static factory methods.

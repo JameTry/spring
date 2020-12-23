@@ -8,16 +8,18 @@ import org.springframework.stereotype.Component;
  * @date: 2020/12/3 10:27
  * @description:
  */
+@Component
 public class B {
-
+	int age;
 
 	String name;
 
-	public B() {
+	public int getAge() {
+		return age;
 	}
 
-	public B(String name) {
-		this.name = name;
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public String getName() {
@@ -31,7 +33,8 @@ public class B {
 	@Override
 	public String toString() {
 		return "B{" +
-				"name='" + name + '\'' +
+				"age=" + age +
+				", name='" + name + '\'' +
 				'}';
 	}
 }

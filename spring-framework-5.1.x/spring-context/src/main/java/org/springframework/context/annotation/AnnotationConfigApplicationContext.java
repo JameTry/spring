@@ -53,6 +53,10 @@ import org.springframework.util.Assert;
  */
 public class AnnotationConfigApplicationContext extends GenericApplicationContext implements AnnotationConfigRegistry {
 
+	/**
+	 * 可以动态,显式的注册一个bean
+	 * 而且具备解析一个类的功能;和扫描解析一个类的功能相同
+	 */
 	private final AnnotatedBeanDefinitionReader reader;
 
 	private final ClassPathBeanDefinitionScanner scanner;
@@ -146,6 +150,9 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	//---------------------------------------------------------------------
 
 	/**
+	 * 注册一个或多个要处理的组件类 请注意，必须调用 refresh()才能使上下文完全处理新类。
+	 * 为什么要注册配置类,spring不是扫描出来吗
+	 * 因为componentScan里的扫描路径在配置类,而这个类还没有被spring加载到容器,spring不知道去哪扫描注册
 	 * Register one or more component classes to be processed.
 	 * <p>Note that {@link #refresh()} must be called in order for the context
 	 * to fully process the new classes.

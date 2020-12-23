@@ -1,14 +1,14 @@
 package com.jame.test;
 
-import com.jame.config.MyFactoryBean;
-import com.jame.config.Myconfig;
-import com.jame.pojo.A;
-import com.jame.pojo.B;
-import com.jame.pojo.C;
-import com.jame.pojo.SonB;
+
+import com.jame.config.*;
+import com.jame.pojo.*;
+import org.springframework.beans.factory.support.*;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.ClassPathResource;
+
+import java.util.HashMap;
 
 /**
  * @author: sunan
@@ -20,17 +20,18 @@ public class MyTest {
 
 
 	public static void main(String[] args) throws Exception {
-		test1();
+		test2();
 	}
 
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		SonB sonB= (SonB) factory.getBean("sonB");
-		System.out.println(sonB);
+		Object b = factory.getBean("gb");
+		System.out.println(b);
+	}
 
-
-		//up
-
+	public static void test2() throws Exception {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Myconfig.class);
+		System.out.println(context.getBean("a"));
 	}
 
 

@@ -1,4 +1,4 @@
-package com.jame.config;
+package com.jame.factory;
 
 import com.jame.pojo.A;
 import com.jame.pojo.B;
