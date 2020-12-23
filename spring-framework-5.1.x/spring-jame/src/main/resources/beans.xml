@@ -5,8 +5,8 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-	<bean id="a" class="com.jame.config.MyFactoryBean"></bean>
+<!--	<bean id="a" class="com.jame.factory.MyFactoryBean"></bean>-->
 
-	<bean id="b" class="com.jame.pojo.MyBFactoryBean"></bean>
-	<bean id="gb" factory-bean="b" factory-method="getB"/>
+<!--	<bean id="b" class="com.jame.factory.MyBFactoryBean"></bean>-->
+<!--	<bean id="gb" factory-bean="b" factory-method="getB"/>-->
 </beans>

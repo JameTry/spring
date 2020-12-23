@@ -1,4 +1,4 @@
-package com.jame.pojo;
+package com.jame.aware;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;

@@ -1,14 +1,9 @@
 package com.jame.test;
 
-import com.jame.config.MyFactoryBean;
-import com.jame.config.Myconfig;
-import com.jame.pojo.A;
-import com.jame.pojo.B;
-import com.jame.pojo.C;
-import com.jame.pojo.SonB;
-import org.springframework.beans.factory.support.ChildBeanDefinition;
-import org.springframework.beans.factory.support.GenericBeanDefinition;
-import org.springframework.beans.factory.support.RootBeanDefinition;
+
+import com.jame.config.*;
+import com.jame.pojo.*;
+import org.springframework.beans.factory.support.*;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.ClassPathResource;
@@ -23,15 +18,20 @@ public class MyTest {
 
 
 	public static void main(String[] args) throws Exception {
-		test1();
+		test2();
 	}
 
 	public static void test1() throws Exception {
 		XmlBeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
 		Object b = factory.getBean("gb");
 		System.out.println(b);
-
 	}
+	public static void test2() throws Exception {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Myconfig.class);
+		System.out.println(context.getBean("a"));
+	}
+
+
 
 
 }

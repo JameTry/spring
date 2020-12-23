@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
  * @date: 2020/12/3 10:27
  * @description:
  */
+@Component
 public class B {
 	int age;
 

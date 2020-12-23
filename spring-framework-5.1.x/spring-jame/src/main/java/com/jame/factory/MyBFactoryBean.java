@@ -1,4 +1,6 @@
-package com.jame.pojo;
+package com.jame.factory;
+
+import com.jame.pojo.B;
 
 /**
  * @author: SunAnKang
@@ -8,7 +10,7 @@ package com.jame.pojo;
 public class MyBFactoryBean {
 
 
-	public  B getB(){
+	public B getB(){
 		return new  B();
 	}
 }
