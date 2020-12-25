@@ -31,7 +31,7 @@ public class MyTest {
 
 	public static void test2() throws Exception {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Myconfig.class);
-		System.out.println(context.getBean("a"));
+
 	}
 
 
