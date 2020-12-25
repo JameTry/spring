@@ -15,6 +15,7 @@ public class A {
 	private B b;
 
 	public A() {
+	//	System.out.println("a");
 	}
 
 	public B getB() {
