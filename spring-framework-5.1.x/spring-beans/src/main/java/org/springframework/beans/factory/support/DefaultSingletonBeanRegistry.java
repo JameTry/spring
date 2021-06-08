@@ -214,6 +214,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 		//首先尝试从单例缓存中获取bean
 		Object singletonObject = this.singletonObjects.get(beanName);
 		//如果从单例缓存中获取不到并且当前正在创建的beanName集合有当前要创建的beanName
+		//如果当前正在创建的beanName集合不包含就没必要继续进行查找了
 		if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
 			//尝试从早期对象三级缓存中获取bean
 			singletonObject = this.earlySingletonObjects.get(beanName);
@@ -412,6 +413,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	protected void beforeSingletonCreation(String beanName) {
 		//包含返回true								已经存在返回false
 		//当前创建检查中排除的BeanName集合不包含当前bean 并且 当前正在创建的单例BeanName集合已经存在当前bean则抛出异常
+		//在ComponentScan注解加上排除的类会被添加到排除集合当中,第二个判断同时将当前正要创建的bean添加到正在创建的bean集合中
 		if (!this.inCreationCheckExclusions.contains(beanName) && !this.singletonsCurrentlyInCreation.add(beanName)) {
 			throw new BeanCurrentlyInCreationException(beanName);
 		}

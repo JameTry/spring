@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @date: 2020/12/7 16:27
  * @description:
  */
-
+@Component
 public class C {
 	int id;
 

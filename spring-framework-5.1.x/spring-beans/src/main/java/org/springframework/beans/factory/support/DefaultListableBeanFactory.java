@@ -971,7 +971,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		}
 		//说明这个BeanDefinition没有注册过
 		else {
-			//检查该工厂的Bean创建阶段是否已经开始，即在此期间是否有任何Bean被标记为已创建。
+			//检查该工厂的BeanDefinition创建阶段是否已经开始，即在此期间是否有任何Bean被标记为已创建。
 			if (hasBeanCreationStarted()) {
 				// Cannot modify startup-time collection elements anymore (for stable iteration)
 				synchronized (this.beanDefinitionMap) {
@@ -993,7 +993,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 				this.beanDefinitionNames.add(beanName);
 				removeManualSingletonName(beanName);
 			}
-			//将 在冻结配置的情况下，bean定义名称的缓存数组清空
+			//将在冻结配置的情况下，bean定义名称的缓存数组清空
 			this.frozenBeanDefinitionNames = null;
 		}
 

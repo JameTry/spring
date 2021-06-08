@@ -2,7 +2,9 @@ package com.jame.test;
 
 
 import com.jame.config.*;
-import com.jame.pojo.*;
+
+import com.jame.pojo.A;
+import com.jame.pojo.B;
 import org.springframework.beans.factory.support.*;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -30,7 +32,11 @@ public class MyTest {
 	}
 
 	public static void test2() throws Exception {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Myconfig.class);
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.register(A.class, B.class,MyTest.class);
+
+		context.refresh();
+		System.out.println(context.getBean(A.class)==context.getBean(A.class));
 
 	}
 

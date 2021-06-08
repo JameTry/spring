@@ -254,7 +254,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		// Eagerly check singleton cache for manually registered singletons.
 		/*
 			检查缓存中或实例工厂是否有对应的实例，可能存在手动注册的bean情况
-			在创建bean的时候可能存在依赖注入的情况,而创建依赖的时候为了避免循环依赖
+			在创建bean的时候可能存在依赖注入情况,而创建依赖的时候为了避免循环依赖
 			spring创建bean的原则就是不等bean创建完成就会创建bean的ObjectFactory提早曝光
 			也就是将ObjectFactory放入缓存中,一旦下一个bean创建时候需要依赖上个bean则直接使用
 		*/
