@@ -260,7 +260,11 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		*/
 		//直接尝试从缓存中获取或者singletonFactories中的ObjectFactory中获取
 		Object sharedInstance = getSingleton(beanName);
-
+		/*
+		什么情况下不为空:
+		1不包含循环依赖的提前创建
+		2 循环依赖的情况
+		*/
 		if (sharedInstance != null && args == null) {
 			if (logger.isTraceEnabled()) {
 				if (isSingletonCurrentlyInCreation(beanName)) {

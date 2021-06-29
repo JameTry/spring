@@ -1,5 +1,7 @@
 package com.jame.config;
 
+import com.jame.pojo.A;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,4 +13,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("com.jame")
 public class Myconfig {
+
+
+
+//	@Bean
+//	public A getA(){
+//		return  new A();
+//	}
 }

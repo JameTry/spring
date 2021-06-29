@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  * @description:
  */
 @Component
-@Scope("prototype")
 public class A {
 
 	@Autowired
@@ -27,10 +26,5 @@ public class A {
 		this.b=b;
 	}
 
-	@Override
-	public String toString() {
-		return "A{" +
-				"b=" + b +
-				'}';
-	}
+
 }

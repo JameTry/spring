@@ -1,5 +1,6 @@
 package com.jame.pojo;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +9,18 @@ import org.springframework.stereotype.Component;
  * @date: 2020/12/3 10:27
  * @description:
  */
+@Component
+public class B  {
 
-public class B {
-	public B() {
-		//System.out.println("b");
+	@Autowired
+	private A a;
+
+	public A getA() {
+		return a;
+	}
+
+	public void setA(A a) {
+		this.a = a;
 	}
 
 	int age;
@@ -34,11 +43,5 @@ public class B {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "B{" +
-				"age=" + age +
-				", name='" + name + '\'' +
-				'}';
-	}
+
 }

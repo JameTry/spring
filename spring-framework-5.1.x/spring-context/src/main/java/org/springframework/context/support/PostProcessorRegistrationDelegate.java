@@ -53,15 +53,17 @@ final class PostProcessorRegistrationDelegate {
 
 	/**
 	 * 执行BeanFactoryPostProcessors的所有实现类
-	 * {
-	 *     1.Spring内置的,在这个方法之前被封装为BeanDefinition放入map中的
-	 *     		1.1 有一种情况不会执行,就是没有被封装为BeanDefinition,并且没有放入map中的
-	 *     2.自定义的
-	 *     		2.1 通过扫描
-	 *     		2.2 通过api提供
-	 *     3.实现Ordered接口的类
-	 *
-	 * }
+     * 1.Spring内置的,在这个方法之前被封装为BeanDefinition放入bdmap中的
+     * 		1.1 有一种情况不会执行,就是没有被封装为BeanDefinition,并且没有放入map中的
+     * 2.自定义的
+     * 		2.1 通过扫描
+     * 		2.2 通过api提供
+	 * 		context.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor());
+     * 3.实现Ordered接口的类
+	 * invoke 只会执行成为bean的BeanFactoryPostProcessors接口的实现类
+	 * spring内置的BeanFactoryPostProcessors必须在该方法执行前存放到bdmap中才会执行
+	 * 自定义的可以在该方法前不存在
+	 * spring在执行内置的BeanFactoryPostProcessors实现类时可以完成扫描
 	 * @param beanFactory
 	 * @param beanFactoryPostProcessors
 	 */
@@ -95,8 +97,12 @@ final class PostProcessorRegistrationDelegate {
 			// PriorityOrdered, Ordered, and the rest.
 			/**
 			 * 存储的是当前需要执行BeanDefinitionRegistryPostProcessor实现类
-			 * 每次执行完会清除,防止重复执行
 			 * BeanDefinitionRegistryPostProcessor是继承于BeanFactoryPostProcessor,一个子类
+			 * 每次执行完会清除,防止重复执行
+			 *
+			 * 实现BeanDefinitionRegistryPostProcessor的类会在spring完成扫描前进行调用
+			 *
+			 *
 			 */
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 

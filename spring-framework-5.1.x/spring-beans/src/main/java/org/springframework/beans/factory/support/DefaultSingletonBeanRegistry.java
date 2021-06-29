@@ -262,7 +262,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 			Object singletonObject = this.singletonObjects.get(beanName);
 			//如果从缓存中获取不到实例
 			if (singletonObject == null) {
-				//判断当时bean是否处于销毁阶段
+				//判断当前bean是否存在正在销毁的集合当中
 				if (this.singletonsCurrentlyInDestruction) {
 					//如果处于销毁阶段则抛出异常
 					throw new BeanCreationNotAllowedException(beanName,
@@ -272,7 +272,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 				if (logger.isDebugEnabled()) {
 					logger.debug("Creating shared instance of singleton bean '" + beanName + "'");
 				}
-				//创建单例模式前的回调方法
+				//把当前正在创建的bean添加到正在创建的集合
 				beforeSingletonCreation(beanName);
 				//将新创建的bean单例设置为false
 				boolean newSingleton = false;
