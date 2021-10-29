@@ -9,4 +9,9 @@
 
 <!--	<bean id="b" class="com.jame.factory.MyBFactoryBean"></bean>-->
 <!--	<bean id="gb" factory-bean="b" factory-method="getB"/>-->
+<!--	<bean id="car" class="com.jame.pojo.CarFactory"  factory-method="getCar"/>-->
+
+<!--	<bean id="carFactory" class="com.jame.pojo.CarFactory"/>-->
+	<bean id="myFactoryBean" class="com.jame.factory.MyFactoryBean"/>
+
 </beans>

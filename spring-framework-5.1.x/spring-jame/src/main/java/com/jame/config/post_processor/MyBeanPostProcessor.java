@@ -14,11 +14,13 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		return null;
+		System.out.println("执行前置处理");
+		return bean;
 	}
 
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-		return null;
+		System.out.println("执行后置处理");
+		return bean;
 	}
 }

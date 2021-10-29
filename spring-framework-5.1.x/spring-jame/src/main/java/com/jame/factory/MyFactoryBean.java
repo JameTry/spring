@@ -12,18 +12,16 @@ import org.springframework.stereotype.Component;
  */
 
 public class MyFactoryBean implements FactoryBean<A> {
+
 	@Override
 	public A getObject() throws Exception {
-		return new A();
+		A a = new A();
+		a.setName("通过FactoryBean创建的对象");
+		return a;
 	}
 
 	@Override
 	public Class<?> getObjectType() {
-		return A.class;
-	}
-
-	@Override
-	public boolean isSingleton() {
-		return false;
+		return null;
 	}
 }

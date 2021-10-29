@@ -875,7 +875,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			 * 2.
 			 */
 			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
+			//判断bd不是抽象类,不是非单例不是懒加载则进行加载
 			if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
+				//判断是否是个factoryBean
 				if (isFactoryBean(beanName)) {
 					Object bean = getBean(FACTORY_BEAN_PREFIX + beanName);
 					if (bean instanceof FactoryBean) {
@@ -1166,12 +1168,22 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		throw new NoSuchBeanDefinitionException(requiredType);
 	}
 
+	/**
+	 * getbean 方法
+	 * @param requiredType
+	 * @param args
+	 * @param nonUniqueAsNull
+	 * @param <T>
+	 * @return
+	 * @throws BeansException
+	 */
 	@SuppressWarnings("unchecked")
 	@Nullable
 	private <T> NamedBeanHolder<T> resolveNamedBean(
 			ResolvableType requiredType, @Nullable Object[] args, boolean nonUniqueAsNull) throws BeansException {
 
 		Assert.notNull(requiredType, "Required type must not be null");
+		//根据传入的Class获取bean的名称
 		String[] candidateNames = getBeanNamesForType(requiredType);
 
 		if (candidateNames.length > 1) {

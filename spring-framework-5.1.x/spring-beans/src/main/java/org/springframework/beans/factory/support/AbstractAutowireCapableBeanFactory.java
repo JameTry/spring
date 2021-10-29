@@ -506,7 +506,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		if (resolvedClass != null
 				&& !mbd.hasBeanClass()
 				&& mbd.getBeanClassName() != null) {
-			//?????为什么不直接set,而是创建了一个新的RootBeanDefinition对象
 			mbdToUse = new RootBeanDefinition(mbd);
 			//将包装的bean对象传入
 			mbdToUse.setBeanClass(resolvedClass);
@@ -623,6 +622,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			//对bean进行填充,将各个属性注入,如果还依赖其他bean的属性,则会递归初始依赖bean
 			populateBean(beanName, mbd, instanceWrapper);
 			//调用初始化方法,例如init-method
+			//自定义的factoryBean方法将在这里调用
 			exposedObject = initializeBean(beanName, exposedObject, mbd);
 		}
 		catch (Throwable ex) {
@@ -1134,7 +1134,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		//如果尚未被解析
 		if (!Boolean.FALSE.equals(mbd.beforeInstantiationResolved)) {
 			// Make sure bean class is actually resolved at this point.
-			//确保此时确实解决了bean类。
 			if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
 				Class<?> targetType = determineTargetType(beanName, mbd);
 				if (targetType != null) {
@@ -1835,6 +1834,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		Object wrappedBean = bean;
 		if (mbd == null || !mbd.isSynthetic()) {
+			//执行factorybean的前置处理
 			wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
 		}
 
@@ -1847,6 +1847,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 					beanName, "Invocation of init method failed", ex);
 		}
 		if (mbd == null || !mbd.isSynthetic()) {
+			//执行factorybean的后置处理
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}
 

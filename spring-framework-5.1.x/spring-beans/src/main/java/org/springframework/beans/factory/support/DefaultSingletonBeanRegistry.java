@@ -220,7 +220,6 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 			singletonObject = this.earlySingletonObjects.get(beanName);
 			// 未能获取到提前曝光的bean且当前的bean允许被创建早期依赖
 			if (singletonObject == null && allowEarlyReference) {
-				//将单例缓存map加锁
 				synchronized (this.singletonObjects) {
 					// Consistent creation of early reference within full singleton lock
 					//再次尝试从单例map缓存获取

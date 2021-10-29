@@ -2,6 +2,8 @@ package com.jame.pojo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
  * @description:
  */
 @Component
+@Scope("prototype")
 public class B  {
 
 	@Autowired
@@ -26,6 +29,10 @@ public class B  {
 	int age;
 
 	String name;
+
+	public B() {
+		System.out.println("B初始化完成");
+	}
 
 	public int getAge() {
 		return age;
