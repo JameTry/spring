@@ -230,6 +230,10 @@ public abstract class AnnotationConfigUtils {
 		}
 	}
 
+	/**
+	 * 解析类上的spring注解,如Lazy,DependsOn也在其中
+	 * @param abd
+	 */
 	public static void processCommonDefinitionAnnotations(AnnotatedBeanDefinition abd) {
 		processCommonDefinitionAnnotations(abd, abd.getMetadata());
 	}

@@ -16,7 +16,6 @@ public class MyFactoryBean implements FactoryBean<A> {
 	@Override
 	public A getObject() throws Exception {
 		A a = new A();
-		a.setName("通过FactoryBean创建的对象");
 		return a;
 	}
 

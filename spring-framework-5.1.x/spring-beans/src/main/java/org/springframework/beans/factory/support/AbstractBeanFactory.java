@@ -171,6 +171,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	private final Map<String, RootBeanDefinition> mergedBeanDefinitions = new ConcurrentHashMap<>(256);
 
 	/** Names of beans that have already been created at least once.
+	 * 也在注册beanDefinition时进行判断是否已经开始进行注册操作
 	 *	至少已经创建过一次的beanDefinition的名称。
 	 * */
 	private final Set<String> alreadyCreated = Collections.newSetFromMap(new ConcurrentHashMap<>(256));

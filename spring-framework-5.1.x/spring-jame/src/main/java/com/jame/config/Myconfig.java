@@ -13,11 +13,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("com.jame")
 public class Myconfig {
-
-
-
-//	@Bean
-//	public A getA(){
-//		return  new A();
-//	}
 }

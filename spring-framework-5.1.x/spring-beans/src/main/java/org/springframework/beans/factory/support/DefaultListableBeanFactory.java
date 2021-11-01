@@ -530,6 +530,15 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		return resolvedBeanNames;
 	}
 
+	/**
+	 * 根据bean类型获取已经存在bdmap中的字符串数组
+	 * 遍历bdnames判断如果改bd的类型和传入的类型相同的话则加入数组
+	 * 因为传入的是接口,所以可能会有多个bd,
+	 * @param type
+	 * @param includeNonSingletons
+	 * @param allowEagerInit
+	 * @return
+	 */
 	private String[] doGetBeanNamesForType(ResolvableType type, boolean includeNonSingletons, boolean allowEagerInit) {
 		List<String> result = new ArrayList<>();
 
@@ -998,6 +1007,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 				}
 			}
 			else {
+				/*
+					注意啦,beanDefinition的注册就在这!!!!
+				 */
 				// Still in startup registration phase
 				this.beanDefinitionMap.put(beanName, beanDefinition);
 				this.beanDefinitionNames.add(beanName);
@@ -1006,7 +1018,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			//将在冻结配置的情况下，bean定义名称的缓存数组清空
 			this.frozenBeanDefinitionNames = null;
 		}
-
+		//判断尝试获取的BeanDefinition不空或者已经存在该对象的实例
 		if (existingDefinition != null || containsSingleton(beanName)) {
 			resetBeanDefinition(beanName);
 		}
