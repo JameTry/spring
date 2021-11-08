@@ -1007,9 +1007,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 				}
 			}
 			else {
-				/*
-					注意啦,beanDefinition的注册就在这!!!!
-				 */
+				//一般情况下beanDefinition的注册就在这
 				// Still in startup registration phase
 				this.beanDefinitionMap.put(beanName, beanDefinition);
 				this.beanDefinitionNames.add(beanName);

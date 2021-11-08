@@ -2,12 +2,10 @@ package com.jame.test;
 
 
 import com.jame.config.*;
-import com.jame.config.post_processor.MyBeanDefinitionRegistryPostProcessor;
 import com.jame.config.post_processor.MyBeanFactoryPostProcessor;
 import com.jame.pojo.A;
 import com.jame.pojo.B;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author: sunan
@@ -22,10 +20,9 @@ public class MyTest {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.register(Myconfig.class);
-		context.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor());
-		context.addBeanFactoryPostProcessor(new MyBeanDefinitionRegistryPostProcessor());
 		context.refresh();
-
+		context.getBean(A.class);
+		context.getBean(B.class);
 
 //		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 //		context.register(Myconfig.class);

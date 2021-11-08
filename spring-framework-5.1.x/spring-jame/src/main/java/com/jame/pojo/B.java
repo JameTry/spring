@@ -12,5 +12,22 @@ import org.springframework.stereotype.Component;
  * @description:
  */
 
-public class B  {
+public class B {
+
+	private A a;
+
+	public B() {
+	}
+
+	public B(A a) {
+		this.a = a;
+	}
+
+	public A getA() {
+		return a;
+	}
+
+	public void setA(A a) {
+		this.a = a;
+	}
 }

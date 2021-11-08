@@ -61,7 +61,6 @@ final class PostProcessorRegistrationDelegate {
 	 * 2.自定义的
 	 * 2.1 通过扫描
 	 * 2.2 通过api提供   context.addBeanFactoryPostProcessor(new MyBeanFactoryPostProcessor());
-	 * 2.3 实现Ordered接口的类
 	 * <p>
 	 * spring内置的BeanFactoryPostProcessors必须在该方法执行前存放到bdmap中才会执行
 	 * <p>
@@ -81,7 +80,6 @@ final class PostProcessorRegistrationDelegate {
 
 		if (beanFactory instanceof BeanDefinitionRegistry) {
 			BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
-
 
 			//存放直接实现BeanFactoryPostProcessor,处理过的实现类
 			List<BeanFactoryPostProcessor> regularPostProcessors = new ArrayList<>();

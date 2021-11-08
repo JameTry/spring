@@ -10,7 +10,5 @@ import com.jame.pojo.B;
 public class MyBFactoryBean {
 
 
-	public B getB(){
-		return new  B();
-	}
+
 }

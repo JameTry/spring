@@ -78,7 +78,7 @@ abstract class ConfigurationClassUtils {
 	 * @param metadataReaderFactory the current factory in use by the caller
 	 * @return whether the candidate qualifies as (any kind of) configuration class
 	 */
-	public static boolean checkConfigurationClassCandidate(
+	public static boolean  checkConfigurationClassCandidate(
 			BeanDefinition beanDef, MetadataReaderFactory metadataReaderFactory) {
 
 		String className = beanDef.getBeanClassName();
@@ -112,9 +112,11 @@ abstract class ConfigurationClassUtils {
 			}
 		}
 
+		//检查是否是一个full配置类,是否加了@Configuration注解
 		if (isFullConfigurationCandidate(metadata)) {
 			beanDef.setAttribute(CONFIGURATION_CLASS_ATTRIBUTE, CONFIGURATION_CLASS_FULL);
 		}
+		//检查是否是一个lite配置类,检查Component/ComponentScan/Import/ImportResource
 		else if (isLiteConfigurationCandidate(metadata)) {
 			beanDef.setAttribute(CONFIGURATION_CLASS_ATTRIBUTE, CONFIGURATION_CLASS_LITE);
 		}
@@ -143,6 +145,7 @@ abstract class ConfigurationClassUtils {
 	}
 
 	/**
+	 * 检查是否有@Configuration注解的存在
 	 * Check the given metadata for a full configuration class candidate
 	 * (i.e. a class annotated with {@code @Configuration}).
 	 * @param metadata the metadata of the annotated class
@@ -154,6 +157,9 @@ abstract class ConfigurationClassUtils {
 	}
 
 	/**
+	 *
+	 * 检查配置类是否添加了spring的经典注解
+	 * 或者其中有@bean的方法存在
 	 * Check the given metadata for a lite configuration class candidate
 	 * (e.g. a class annotated with {@code @Component} or just having
 	 * {@code @Import} declarations or {@code @Bean methods}).

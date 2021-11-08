@@ -2,31 +2,28 @@ package com.jame.pojo;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 /**
  * @author: SunAnKang
  * @date: 2020/12/7 16:27
  * @description:
  */
-@Component
 public class C {
-	int id;
-
+	private A a;
 
 	public C() {
 	}
 
-
-
-	public C(int id) {
-		this.id = id;
+	public C(A a) {
+		this.a = a;
 	}
 
+	public A getA() {
+		return a;
+	}
 
-
-	@Override
-	public String toString() {
-		return "C{" +
-				"id=" + id +
-				'}';
+	public void setA(A a) {
+		this.a = a;
 	}
 }
