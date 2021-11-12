@@ -15,32 +15,9 @@ import org.springframework.stereotype.Component;
  */
 
 
-//@ComponentScan("com.jame")
+
 @Configuration
-//@Component
+@ComponentScan("com.jame")
 public class Myconfig {
 
-	@Bean
-	public A getA(){
- 		System.out.println("执行getA");
-		return new A();
-	}
-
-	@Bean
-	public B getB(A a){
-		System.out.println("执行getB");
-		System.out.println(a);
-		B b = new B();
-		b.setA(a);
-		return b;
-	}
-
-	@Bean
-	public C getC(A a){
-		System.out.println("执行getC");
-		System.out.println(a);
-		C c = new C();
-		c.setA(a);
-		return c;
-	}
 }

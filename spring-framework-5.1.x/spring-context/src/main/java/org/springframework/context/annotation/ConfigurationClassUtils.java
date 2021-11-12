@@ -158,7 +158,7 @@ abstract class ConfigurationClassUtils {
 
 	/**
 	 *
-	 * 检查配置类是否添加了spring的经典注解
+	 * 检查配置类是否添加了spring的典型注解
 	 * 或者其中有@bean的方法存在
 	 * Check the given metadata for a lite configuration class candidate
 	 * (e.g. a class annotated with {@code @Component} or just having

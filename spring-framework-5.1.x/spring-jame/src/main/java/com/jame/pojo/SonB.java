@@ -6,30 +6,8 @@ package com.jame.pojo;
  * @description:
  */
 public class SonB {
-	int age;
-	String name;
-
-	public String getName() {
-		return name;
+	static{
+		System.out.println("sonB执行了.........");
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	@Override
-	public String toString() {
-		return "SonB{" +
-				"age=" + age +
-				", name='" + name + '\'' +
-				'}';
-	}
 }

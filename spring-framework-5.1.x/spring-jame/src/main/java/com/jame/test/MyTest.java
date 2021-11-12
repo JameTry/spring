@@ -1,11 +1,16 @@
 package com.jame.test;
 
 
-import com.jame.config.*;
-import com.jame.config.post_processor.MyBeanFactoryPostProcessor;
+
+
+
+import com.jame.config.MyConfig2;
+import com.jame.config.Myconfig;
+import com.jame.config.post_processor.MyBeanDefinitionRegistryPostProcessor;
 import com.jame.pojo.A;
-import com.jame.pojo.B;
+import com.jame.pojo.Car;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 
 /**
  * @author: sunan
@@ -16,13 +21,15 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class MyTest {
 
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args)  {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.register(Myconfig.class);
+		context.addBeanFactoryPostProcessor(new MyBeanDefinitionRegistryPostProcessor());
 		context.refresh();
 		context.getBean(A.class);
-		context.getBean(B.class);
+
+
+
 
 //		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 //		context.register(Myconfig.class);

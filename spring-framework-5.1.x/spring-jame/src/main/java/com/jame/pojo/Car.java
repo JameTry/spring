@@ -5,7 +5,7 @@ package com.jame.pojo;
  * @date : 2021-10-26 09:19
  **/
 public class Car {
-	public Car() {
-		System.out.println("car创建实例");
+	static{
+		System.out.println("初始化啦");
 	}
 }

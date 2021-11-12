@@ -1,3 +1,19 @@
+
 1.spring内部存在bdmap和单例map,在beanDefinitionPostProcessor时候为什么不将ConfigurationClassPostProcessor直接存放到单例map中
+
 2.spring的full配置类和lite配置类区别是啥
+
 3.使用(Config.class)构造的扫描器为什么需要新new一个,不使用构造中已经创建出的扫描器
+
+4.spring扫描获取.class文件为什么不直接Class.forName来加载然后判断是否符合spring的组件,而是变成流使用asm技术来判断
+    4.1: 因为如果使用Class.forName()将.class文件加载到jvm,会扰乱用户的行为,例如用户在类中有static{}块
+    这个static静态代码块的执行时机是由用户来决定的,一旦将它加载到jvm则会立即执行
+
+5. 什么时候bd已经存在full或lite
+if (ConfigurationClassUtils.isFullConfigurationClass(beanDef) ||
+        ConfigurationClassUtils.isLiteConfigurationClass(beanDef)) {
+    if (logger.isDebugEnabled()) {
+        logger.debug("Bean definition has already been processed as a configuration class: " + beanDef);
+    }
+}
+

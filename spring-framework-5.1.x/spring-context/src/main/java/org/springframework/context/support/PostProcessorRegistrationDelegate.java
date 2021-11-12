@@ -120,7 +120,7 @@ final class PostProcessorRegistrationDelegate {
 			 * 首先执行spring内置的BeanDefinitionRegistryPostProcessors
 			 * 根据Class类型获取bean的名称数组
 			 * 这个时候获取的只有spring内置的实现BeanDefinitionRegisitryPostProcessor
-			 * 因为自定义的实现这个接口的bean还没有被spring扫描,添加到bdmap中华
+			 * 因为自定义的实现这个接口的bean还没有被spring扫描,添加到bdmap中
 			 * 一般情况获取的是ConfigurationClassPostProcessor
 			 */
 			String[] postProcessorNames =
