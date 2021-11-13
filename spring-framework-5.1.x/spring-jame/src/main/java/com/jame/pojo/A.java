@@ -9,8 +9,6 @@ import javax.xml.ws.ServiceMode;
  * @date: 2020/12/4 10:40
  * @description:
  */
-@Component
-
 public class A {
 
 	private  B b;

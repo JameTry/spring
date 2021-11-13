@@ -1,16 +1,9 @@
 package com.jame.test;
 
 
-
-
-
-import com.jame.config.MyConfig2;
 import com.jame.config.Myconfig;
-import com.jame.config.post_processor.MyBeanDefinitionRegistryPostProcessor;
 import com.jame.pojo.A;
-import com.jame.pojo.Car;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 
 /**
  * @author: sunan
@@ -22,10 +15,12 @@ public class MyTest {
 
 
 	public static void main(String[] args)  {
+
+
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.register(Myconfig.class);
-		context.addBeanFactoryPostProcessor(new MyBeanDefinitionRegistryPostProcessor());
+		context.register(Myconfig.class, A.class);
 		context.refresh();
+
 		context.getBean(A.class);
 
 
@@ -39,9 +34,9 @@ public class MyTest {
 
 
 //
-//		B bean = context.getBean(B.class);
+//		B bean = gggggg.eeBean(B.class);
 //		System.out.println(bean);
-//		System.out.println(bean.getA());
+//		System.out.println(bean.eeA());
 ////
 //		B bean1= context.getBean(B.class);
 //		System.out.println(bean1);

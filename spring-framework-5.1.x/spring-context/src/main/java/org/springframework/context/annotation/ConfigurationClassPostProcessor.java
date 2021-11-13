@@ -215,6 +215,18 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 
 	/**
 	 * Derive further bean definitions from the configuration classes in the registry.
+	 * 1.完成扫描
+	 * 	 * 2.完成对配置类的标识
+	 * 	 * 3.对import的处理
+	 * 	 * 		1.实现ImportSelector接口  --springboot
+	 * 	 * 		2.实现ImportBeanDefinitionRegister接口	--mybatis
+	 * 	 * 		3.普通类
+	 * 	 * 			1.没有任何特殊直接
+	 * 	 * 			2.添加了Import
+	 * 	 * 	4.ImportResource
+	 * 	 * 	5.@Bean方法
+	 * 	 * 	6.接口中的@Bean
+	 * 	 * 	7.处理@PropertySource
 	 */
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
@@ -235,6 +247,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	/**
 	 * Prepare the Configuration classes for servicing bean requests at runtime
 	 * by replacing them with CGLIB-enhanced subclasses.
+	 * 接下来判断配置类是full还是lite,判断是否需要代理
 	 */
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
@@ -249,7 +262,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 			// Simply call processConfigurationClasses lazily at this point then.
 			processConfigBeanDefinitions((BeanDefinitionRegistry) beanFactory);
 		}
-
+		//判断是否需要代理
 		enhanceConfigurationClasses(beanFactory);
 		beanFactory.addBeanPostProcessor(new ImportAwareBeanPostProcessor(beanFactory));
 	}
@@ -271,6 +284,8 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 				}
 			}
 			//如果类添加了Configuration注解或spring经典注解则添加到configCandidates集合中
+			//这一步对配置类标识仅仅是为了判断当前传入的类是否是一个配置类
+			//而标记full和lite是为了后面的判断是否需要对这个类进行代理
 			else if (ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory)) {
 				configCandidates.add(new BeanDefinitionHolder(beanDef, beanName));
 			}
@@ -311,6 +326,11 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 
 		Set<BeanDefinitionHolder> candidates = new LinkedHashSet<>(configCandidates);
 		Set<ConfigurationClass> alreadyParsed = new HashSet<>(configCandidates.size());
+		/**
+		 *	分为两步:解析和执行
+		 * 	在parse方法中将配置类抽象出为一个ConfigurationClass
+		 * 	而在下面this.reader.loadBeanDefinitions(configClasses);方法在进行执行
+		 */
 		do {
 			parser.parse(candidates);
 			parser.validate();

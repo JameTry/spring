@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @author : Jame
  * @date : 2021-11-11 15:35
  **/
-@Configuration
-@ComponentScan("com")
+
 public class MyConfig2 {
 
 	@Bean

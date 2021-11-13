@@ -300,6 +300,7 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @Import annotations
+		//例如mybatis的mapperScan注解将会在这里解析
 		processImports(configClass, sourceClass, getImports(sourceClass), true);
 
 		// Process any @ImportResource annotations
