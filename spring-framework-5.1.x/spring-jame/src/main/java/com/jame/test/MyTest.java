@@ -2,6 +2,7 @@ package com.jame.test;
 
 
 import com.jame.config.Myconfig;
+import com.jame.config.post_processor.BDRPP_API;
 import com.jame.pojo.A;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -18,12 +19,9 @@ public class MyTest {
 
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.register(Myconfig.class, A.class);
+		context.register(Myconfig.class);
 		context.refresh();
-
-		context.getBean(A.class);
-
-
+		System.out.println(context.getBean("myFactoryBean"));
 
 
 //		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @date: 2020/12/8 14:58
  * @description:
  */
-
+@Component
 public class MyFactoryBean implements FactoryBean<A> {
 
 	@Override

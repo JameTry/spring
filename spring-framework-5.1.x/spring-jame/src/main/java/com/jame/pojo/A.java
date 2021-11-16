@@ -9,7 +9,8 @@ import javax.xml.ws.ServiceMode;
  * @date: 2020/12/4 10:40
  * @description:
  */
-public class A {
+
+public class A  implements Aint{
 
 	private  B b;
 
