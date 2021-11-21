@@ -10,7 +10,7 @@ import javax.xml.ws.ServiceMode;
  * @description:
  */
 
-public class A  implements Aint{
+public class A   {
 
 	private  B b;
 

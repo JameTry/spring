@@ -17,3 +17,5 @@ if (ConfigurationClassUtils.isFullConfigurationClass(beanDef) ||
     }
 }
 
+6.合并bean定义?
+

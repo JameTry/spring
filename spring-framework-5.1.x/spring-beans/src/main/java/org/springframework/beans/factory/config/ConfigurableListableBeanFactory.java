@@ -43,6 +43,7 @@ public interface ConfigurableListableBeanFactory
 		extends ListableBeanFactory, AutowireCapableBeanFactory, ConfigurableBeanFactory {
 
 	/**
+	 * 忽略自动装配的依赖类型
 	 * Ignore the given dependency type for autowiring:
 	 * for example, String. Default is none.
 	 * @param type the dependency type to ignore
@@ -50,6 +51,10 @@ public interface ConfigurableListableBeanFactory
 	void ignoreDependencyType(Class<?> type);
 
 	/**
+	 * 忽略在实现类在接口中重写的set注入方法
+	 * 前提是需要注入属性的类的注入模型是自动注入
+	 * 例如a接口中定义set(c)方法,而b类实现a接口,重写set(c)方法
+	 * 那么添加ignoreDependencyInterface(a.class)后,所有的实现a接口中的注入方法将忽略
 	 * Ignore the given dependency interface for autowiring.
 	 * <p>This will typically be used by application contexts to register
 	 * dependencies that are resolved in other ways, like BeanFactory through

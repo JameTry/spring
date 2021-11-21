@@ -255,17 +255,12 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		// Eagerly check singleton cache for manually registered singletons.
 		/*
 			检查缓存中或实例工厂是否有对应的实例，可能存在手动注册的bean情况
-			在创建bean的时候可能存在依赖注入情况,而创建依赖的时候为了避免循环依赖
+			在创建bean的时候可能存在依赖注入情况,而bean的时候为了避免循环依赖
 			spring创建bean的原则就是不等bean创建完成就会创建bean的ObjectFactory提早曝光
 			也就是将ObjectFactory放入缓存中,一旦下一个bean创建时候需要依赖上个bean则直接使用
 		*/
 		//直接尝试从缓存中获取或者singletonFactories中的ObjectFactory中获取
 		Object sharedInstance = getSingleton(beanName);
-		/*
-		什么情况下不为空:
-		1不包含循环依赖的提前创建
-		2 循环依赖的情况
-		*/
 		if (sharedInstance != null && args == null) {
 			if (logger.isTraceEnabled()) {
 				if (isSingletonCurrentlyInCreation(beanName)) {
@@ -1326,7 +1321,6 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			RootBeanDefinition mbd = null;
 
 			// Check with full lock now in order to enforce the same merged instance.
-			//立即检查完全锁定，以强制执行相同的合并实例。
 			if (containingBd == null) {
 				//尝试获取rootBeanDefinition
 				mbd = this.mergedBeanDefinitions.get(beanName);
