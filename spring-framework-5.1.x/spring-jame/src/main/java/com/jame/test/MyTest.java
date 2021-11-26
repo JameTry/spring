@@ -27,6 +27,7 @@ public class MyTest {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.register(Myconfig.class);
 		context.refresh();
+		System.out.println(context.getBean("a"));
 
 
 		//UserService userService = (UserService) context.getBean("userService");

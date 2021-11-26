@@ -24,24 +24,9 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan("com.jame")
-@MapperScan("com.jame.mapper")
+
 public class Myconfig {
 
-	@Bean
-	public DataSource dataSource(){
-		DriverManagerDataSource source = new DriverManagerDataSource();
-		source.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		source.setUsername("root");
-		source.setPassword("root");
-		source.setUrl("jdbc:mysql://localhost:3306/study?useSSL=true&useUnicode=true&characterEncoding=utf8");
-		return source;
-	}
 
-	@Bean
-	public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource){
-		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-		factoryBean.setDataSource(dataSource);
-		return factoryBean;
-	}
 
 }

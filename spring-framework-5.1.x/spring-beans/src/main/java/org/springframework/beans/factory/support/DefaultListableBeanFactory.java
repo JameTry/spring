@@ -182,12 +182,12 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	private final Map<String, BeanDefinitionHolder> mergedBeanDefinitionHolders = new ConcurrentHashMap<>(256);
 
 	/** Map of singleton and non-singleton bean names, keyed by dependency type.
-	 * 单例和非单例Bean名称的映射，按依赖项类型进行监控
+	 * 存放依赖的对象,存放单例和非单例的bean名称(别名情况),key为Class类型
 	 * */
 	private final Map<Class<?>, String[]> allBeanNamesByType = new ConcurrentHashMap<>(64);
 
 	/** Map of singleton-only bean names, keyed by dependency type.
-	 * 仅依赖单例的bean名称的映射，由依赖项类型键控
+	 * 存放依赖的对象,存放单例的bean名称(别名情况),key为Class类型
 	 * */
 	private final Map<Class<?>, String[]> singletonBeanNamesByType = new ConcurrentHashMap<>(64);
 
@@ -879,10 +879,6 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 		// Trigger initialization of all non-lazy singleton beans...
 		for (String beanName : beanNames) {
-			/**
-			 * 1. 通过beanName获取beanDefinition
-			 * 2.
-			 */
 			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
 			//判断bd不是抽象类,不是非单例不是懒加载则进行加载
 			if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
@@ -906,7 +902,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 						}
 					}
 				}
-				//非FactoryBean,正常bean情况
+				//非FactoryBean,普通bean情况
 				else {
 					getBean(beanName);
 				}
@@ -990,7 +986,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		}
 		//说明这个BeanDefinition没有注册过
 		else {
-			//检查该工厂的BeanDefinition创建阶段是否已经开始，即在此期间是否有任何Bean被标记为已创建。
+			//检查该工厂的BeanDefinition创建阶段是否已经开始
+			//判断alreadyCreated集合是否为空
 			if (hasBeanCreationStarted()) {
 				// Cannot modify startup-time collection elements anymore (for stable iteration)
 				synchronized (this.beanDefinitionMap) {
@@ -1011,6 +1008,10 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 				// Still in startup registration phase
 				this.beanDefinitionMap.put(beanName, beanDefinition);
 				this.beanDefinitionNames.add(beanName);
+				/**
+				 * 如果发现手动注册的bean和当前注册的beanDefinition的name相同
+				 * 并且存在单例map中则删除手动注册的bean
+				 */
 				removeManualSingletonName(beanName);
 			}
 			//将在冻结配置的情况下，bean定义名称的缓存数组清空

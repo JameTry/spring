@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @author : Jame
  * @date : 2021-11-18 16:27
  **/
-@Component
+//@Component
 public class UserService {
 
 	@Autowired

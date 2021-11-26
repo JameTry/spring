@@ -315,7 +315,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					return (T) parentBeanFactory.getBean(nameToLookup);
 				}
 			}
-			// 如果当前bean不是用于类型检查,则将该bean标记为已经被创建或者即将被创建
+			// 如果当前bean完成检查,则将该bean标记为已经被创建或者即将被创建
 			if (!typeCheckOnly) {
 				//这个方法将指定的bean标记为已经创建
 				markBeanAsCreated(beanName);
@@ -1654,7 +1654,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
-	 * 将指定的bean标记为已创建（或将要创建）。 <p>这允许bean工厂优化其缓存以重复创建指定的bean
+	 * 将指定的bean标记为已创建（或将要创建）。
+	 * <p>这允许bean工厂优化其缓存以重复创建指定的bean
 	 * Mark the specified bean as already created (or about to be created).
 	 * <p>This allows the bean factory to optimize its caching for repeated
 	 * creation of the specified bean.
