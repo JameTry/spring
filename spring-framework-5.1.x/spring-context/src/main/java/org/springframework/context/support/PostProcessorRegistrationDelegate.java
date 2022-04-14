@@ -107,6 +107,7 @@ final class PostProcessorRegistrationDelegate {
 			// Separate between BeanDefinitionRegistryPostProcessors that implement
 			// PriorityOrdered, Ordered, and the rest.
 			/**
+			 *
 			 * 存储的是当前需要执行BeanDefinitionRegistryPostProcessor实现类
 			 * BeanDefinitionRegistryPostProcessor是继承于BeanFactoryPostProcessor,一个子接口
 			 * 什么叫当前的:BeanFactoryPostProcessors的所有实现类有spring内置的和我们自己提供的

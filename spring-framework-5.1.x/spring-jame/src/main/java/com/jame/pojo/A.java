@@ -1,8 +1,10 @@
 package com.jame.pojo;
 
+import com.jame.pojo.test.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import javax.xml.ws.ServiceMode;
 
 /**
  * @author: sunan
@@ -11,21 +13,27 @@ import javax.xml.ws.ServiceMode;
  */
 @Component
 public class A   {
-
-	private  B b;
-
 	public A() {
+		System.out.println("a created");
 	}
 
-	public A(B b) {
-		this.b = b;
-	}
 
-	public B getB() {
-		return b;
-	}
+	//	@Autowired
+//	private ApplicationContext applicationContext;
+//
+//	@Autowired
+//	private Test testA;
 
-	public void setB(B b) {
-		this.b = b;
-	}
+
+//	public void setTest(Test test) {
+//		this.testA = test;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "A{" +
+//				"test=" + testA +
+//				"sdasd"+applicationContext+
+//				'}';
+//	}
 }

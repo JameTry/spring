@@ -304,6 +304,9 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		});
 
 		// Detect any custom bean name generation strategy supplied through the enclosing application context
+		//判断当前的注册类中是否存在自定义名称生成策略
+		//在 springframework.context.annotation.AnnotationConfigApplicationContext#setBeanNameGenerator方法中
+		//会将自己设置的bean名称生成策略存放到单例池中
 		SingletonBeanRegistry sbr = null;
 		if (registry instanceof SingletonBeanRegistry) {
 			sbr = (SingletonBeanRegistry) registry;
@@ -320,6 +323,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 			this.environment = new StandardEnvironment();
 		}
 		// Parse each @Configuration class
+		//这里将自定义设置的名称生成策略传入==
 		ConfigurationClassParser parser = new ConfigurationClassParser(
 				this.metadataReaderFactory, this.problemReporter, this.environment,
 				this.resourceLoader, this.componentScanBeanNameGenerator, registry);

@@ -9,6 +9,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +24,8 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@ComponentScan("com.jame")
-
+//@ComponentScan("com.jame")
+@ImportResource("classpath:beans.xml")
 public class Myconfig {
 
 

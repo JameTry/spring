@@ -79,6 +79,14 @@ public class AnnotatedBeanDefinitionReader {
 	 * @param environment the {@code Environment} to use when evaluating bean definition
 	 * profiles.
 	 * @since 3.1
+	 *
+	 * 读取添加注解的类,然后生成beanDefinition
+	 *
+	 * 1. 可以注册beanDefinition  BeanDefinitionRegistry
+	 * 2. 生成bean的名称, BeanNameGenerator 和DefaultBeanNameGenerator不同的是
+	 *  AnnotationBeanNameGenerator可以读取注解上的指定的值,例如@Component("application")
+	 *  可以自定义一些名称的生成策略
+	 *
 	 */
 	public AnnotatedBeanDefinitionReader(BeanDefinitionRegistry registry, Environment environment) {
 		Assert.notNull(registry, "BeanDefinitionRegistry must not be null");
@@ -219,9 +227,17 @@ public class AnnotatedBeanDefinitionReader {
 			return;
 		}
 
+		/*
+			设置Supplier,可以用来替代静态工厂方法
+			静态工厂方法不会创建工厂的实例-在spring容器中也不存在该工厂的bean
+			而实例工厂方法会创建工厂的实例和工厂产生对象的实例,并且两者的bean都会存在于spring容器当中
+
+		*/
 		abd.setInstanceSupplier(instanceSupplier);
+		//获取Scope的作用域
 		ScopeMetadata scopeMetadata = this.scopeMetadataResolver.resolveScopeMetadata(abd);
 		abd.setScope(scopeMetadata.getScopeName());
+		//可以通过context.setBeanNameGenerator方法来自定义bean名称的生成策略
 		String beanName = (name != null ? name : this.beanNameGenerator.generateBeanName(abd, this.registry));
 
 		 //解析类上的spring注解,如Lazy,DependsOn也在其中

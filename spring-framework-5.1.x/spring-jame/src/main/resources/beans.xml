@@ -13,6 +13,7 @@
 
 	<!--	<bean id="carFactory" class="com.jame.pojo.CarFactory"/>-->
 
-
+		<bean id="a" factory-bean="aFactory" factory-method="getA"/>
+		<bean id="aFactory" class="com.jame.factory.AFactory" />
 
 </beans>
