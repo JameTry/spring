@@ -2,7 +2,9 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans.xsd"
+		default-autowire="byType">
 
 
 	<!--	<bean id="a" class="com.jame.factory.MyFactoryBean"></bean>-->
@@ -12,8 +14,17 @@
 	<!--	<bean id="car" class="com.jame.pojo.CarFactory"  factory-method="getCar"/>-->
 
 	<!--	<bean id="carFactory" class="com.jame.pojo.CarFactory"/>-->
+		<bean id="home1" class="com.jame.pojo.service.Home1">
+
+		</bean>
 
 		<bean id="a" factory-bean="aFactory" factory-method="getA"/>
 		<bean id="aFactory" class="com.jame.factory.AFactory" />
+
+
+		<bean id="homeTest" class="com.jame.pojo.service.HomeTest">
+
+		</bean>
+
 
 </beans>
