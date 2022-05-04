@@ -4,17 +4,17 @@ package com.jame.pojo;
  * @author : Jame
  * @date : 2021-11-18 16:08
  **/
-public class User {
+public class PojoUser {
 
 	private Integer id;
 	private String name;
 	private Integer number;
 	private Integer classId;
 
-	public User() {
+	public PojoUser() {
 	}
 
-	public User(Integer id, String name, Integer number, Integer classId) {
+	public PojoUser(Integer id, String name, Integer number, Integer classId) {
 		this.id = id;
 		this.name = name;
 		this.number = number;

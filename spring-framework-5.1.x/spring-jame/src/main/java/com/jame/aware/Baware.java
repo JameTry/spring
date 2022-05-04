@@ -17,5 +17,6 @@ public class Baware implements BeanFactoryAware {
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		this.beanFactory = beanFactory;
+
 	}
 }

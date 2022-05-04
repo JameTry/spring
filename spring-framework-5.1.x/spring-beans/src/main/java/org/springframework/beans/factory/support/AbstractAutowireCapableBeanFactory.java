@@ -155,7 +155,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 */
 	private final NamedThreadLocal<String> currentlyCreatedBean = new NamedThreadLocal<>("Currently created bean");
 
-	/**未完成的FactoryBean实例的高速缓存：BeanWrapper的FactoryBean名称
+	/**未完成的FactoryBean实例的缓存：FactoryBean名称--BeanWrapper
 	 *  Cache of unfinished FactoryBean instances: FactoryBean name to BeanWrapper. */
 	private final ConcurrentMap<String, BeanWrapper> factoryBeanInstanceCache = new ConcurrentHashMap<>();
 

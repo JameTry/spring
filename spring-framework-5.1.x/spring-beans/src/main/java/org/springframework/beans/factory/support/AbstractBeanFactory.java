@@ -302,16 +302,13 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				}
 				else if (args != null) {
 					// Delegation to parent with explicit args.
-					//如果有显式参数,委托给父级处理
 					return (T) parentBeanFactory.getBean(nameToLookup, args);
 				}
 				else if (requiredType != null) {
 					// No args -> delegate to standard getBean method.
-					//委托到标准的getBean方法
 					return parentBeanFactory.getBean(nameToLookup, requiredType);
 				}
 				else {
-					// 否则委托parentBeanFactory使用默认的getBean方法
 					return (T) parentBeanFactory.getBean(nameToLookup);
 				}
 			}
