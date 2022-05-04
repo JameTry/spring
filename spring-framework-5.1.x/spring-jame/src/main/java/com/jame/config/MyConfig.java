@@ -24,9 +24,9 @@ import javax.sql.DataSource;
 
 
 @Configuration
-//@ComponentScan("com.jame")
-@ImportResource("classpath:beans.xml")
-public class Myconfig {
+@ComponentScan("com.jame.pojo")
+//@ImportResource("classpath:beans.xml")
+public class MyConfig {
 
 
 

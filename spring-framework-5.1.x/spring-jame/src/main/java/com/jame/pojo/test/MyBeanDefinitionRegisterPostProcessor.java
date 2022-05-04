@@ -1,7 +1,6 @@
-package com.jame.config.post_processor;
+package com.jame.pojo.test;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
  **/
 
 @Component
-public class BDRPP_Scan implements BeanDefinitionRegistryPostProcessor {
+public class MyBeanDefinitionRegisterPostProcessor implements BeanDefinitionRegistryPostProcessor {
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 		System.out.println("扫描-BDRPP_Scan的postProcessBeanDefinitionRegistry方法");

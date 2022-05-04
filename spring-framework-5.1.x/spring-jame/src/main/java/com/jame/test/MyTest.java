@@ -1,19 +1,8 @@
 package com.jame.test;
 
 
-import com.jame.config.Myconfig;
-import com.jame.config.post_processor.BDRPP_API;
-import com.jame.pojo.A;
-import com.jame.pojo.test.Test;
-import com.jame.pojo.test.TestA;
-import com.jame.pojo.test.TestB;
-import com.jame.service.UserService;
+import com.jame.config.MyConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author: sunan
@@ -28,10 +17,9 @@ public class MyTest {
 
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.setBeanNameGenerator();
-		context.register(Myconfig.class);
+		context.register(MyConfig.class);
 		context.refresh();
-		context.getBean("a");
+		System.out.println(context.getBean("a"));
 		System.out.println();
 
 

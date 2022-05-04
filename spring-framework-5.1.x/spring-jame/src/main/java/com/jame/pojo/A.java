@@ -1,6 +1,7 @@
 package com.jame.pojo;
 
 import com.jame.pojo.test.Test;
+import com.jame.pojo.test.TestA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -13,27 +14,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class A   {
-	public A() {
-		System.out.println("a created");
+
+	private TestA testA;
+
+	public void setTestA(TestA testA) {
+		System.out.println("走set方法啦");
+		this.testA = testA;
 	}
 
-
-	//	@Autowired
-//	private ApplicationContext applicationContext;
-//
-//	@Autowired
-//	private Test testA;
-
-
-//	public void setTest(Test test) {
-//		this.testA = test;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "A{" +
-//				"test=" + testA +
-//				"sdasd"+applicationContext+
-//				'}';
-//	}
+	@Override
+	public String toString() {
+		return "A{" +
+				"testA=" + testA +
+				'}';
+	}
 }
